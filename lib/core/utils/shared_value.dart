@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class CustomColors {
   static const Color primary = Color(0xFF0DB665);
   static const Color secondary = Color(0xFFD4F6CC);
+  static const Color borderField = Color(0xFFDEDEDE);
+  static const Color buttonColor = Color(0xFFEF5B0C);
   static const Color colorsFontPrimary = Color(0xFF444444);
+  static const Color colorsFontHeader = Color(0xFF666B70);
   static const Color colorsFontSecondary = Color(0xFFAAAAAA);
   static const Color colorFontsWhite = Color(0xFFFFFFFF);
   static const Color colorFontGreen = Color(0xFF1A3B34);
