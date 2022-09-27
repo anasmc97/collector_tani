@@ -12,13 +12,13 @@ class ButtonHome extends StatelessWidget {
     return Column(
       children: [
         Container(
-            width: MediaQuery.of(context).size.width * 0.2,
-            height: MediaQuery.of(context).size.height * 0.1,
+            width: 51,
+            height: 51,
             decoration: BoxDecoration(
-              color: CustomColors.secondary,
+              color: CustomColors.primary.withOpacity(0.1),
               image: DecorationImage(image: AssetImage(image!),
                 ),
-              borderRadius: const BorderRadius.all(Radius.circular(20),
+              borderRadius: const BorderRadius.all(Radius.circular(10),
               ),
             ),
         ),

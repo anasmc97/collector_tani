@@ -5,7 +5,7 @@ class CustomTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       scaffoldBackgroundColor: Colors.white,
-      fontFamily: "Inter",
+      fontFamily: 'Poppins',
       textTheme: const TextTheme(
         headline1: TextStyle(
             fontSize: 20.0,
@@ -17,7 +17,6 @@ class CustomTheme {
           color: CustomColors.colorsFontSecondary,
         ),
         bodyText1: TextStyle(
-          fontFamily: "Roboto",
           fontSize: 12.0,
           fontWeight: FontWeight.normal,
           color: CustomColors.colorsFontPrimary,

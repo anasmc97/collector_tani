@@ -6,7 +6,14 @@ class CustomTextFormField extends StatefulWidget {
   TextEditingController? controller;
   String? hintext;
   bool? isPasswordField;
-  CustomTextFormField({Key? key, this.controller, this.hintext, this.isPasswordField = false}) : super(key: key);
+  bool? isNumber;
+  String? Function(String?)? validator;
+  CustomTextFormField({Key? key,
+    this.controller,
+    this.hintext,
+    this.isPasswordField = false,
+    this.isNumber,
+    this.validator}) : super(key: key);
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -15,21 +22,27 @@ class CustomTextFormField extends StatefulWidget {
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool isObscure;
   late bool isPasswordField;
+  bool? isNumber;
   TextEditingController? controller;
   String? hintext;
+  String? Function(String?)? validator;
   @override
   void initState() {
     isObscure = widget.isPasswordField!;
     isPasswordField = widget.isPasswordField!;
     controller = widget.controller;
     hintext = widget.hintext;
+    isNumber = widget.isNumber;
+    validator = widget.validator;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: isObscure!,
+      validator: validator,
+      keyboardType: isNumber != null ? TextInputType.phone : null,
+      obscureText: isObscure,
       controller: controller,
       decoration: InputDecoration(
         suffixIcon: isPasswordField ? GestureDetector(
@@ -56,6 +69,20 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+                color: Colors.red,
+                width: 2
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+                color: Colors.red,
+                width: 2
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          )
       ),
     );
   }

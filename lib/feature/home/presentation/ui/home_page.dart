@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/home/presentation/widgets/button_home.dart';
 
 class HomePage extends StatelessWidget {
@@ -33,12 +34,13 @@ class HomePage extends StatelessWidget {
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.9,
                         decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(50),
+                          borderRadius: BorderRadius.all(Radius.circular(10),
                           ),
                         ),
                         child: ImageSlideshow(
                           isLoop: true,
-                          indicatorRadius: 0,
+                          indicatorRadius: 8,
+                          indicatorColor: CustomColors.buttonColor,
                           children: [
                             Image.asset(
                               'assets/images/promo_image.png',
