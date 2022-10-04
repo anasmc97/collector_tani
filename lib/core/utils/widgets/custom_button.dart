@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:project_tani/core/utils/shared_value.dart';
 
 class CustomButton extends StatelessWidget {
   Color? color;
   String textButton;
   Function()? onTap;
-  CustomButton(this.textButton,{Key? key, this.color, this.onTap}) : super(key: key);
+  Color? fontColor;
+  Color? borderColor;
+  CustomButton(this.textButton,{Key? key, this.color, this.onTap, this.fontColor = Colors.white, this.borderColor = CustomColors.buttonColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +21,12 @@ class CustomButton extends StatelessWidget {
           color: color,
           borderRadius: const BorderRadius.all(Radius.circular(10),
           ),
+          border: Border.all(
+            color: borderColor!
+          )
         ),
         child: Text(textButton,
-          style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w500),),
+          style: Theme.of(context).textTheme.headline1!.copyWith(color: fontColor, fontSize: 24, fontWeight: FontWeight.w500),),
 
       ),
     );

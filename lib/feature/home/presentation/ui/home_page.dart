@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
+import 'package:project_tani/feature/Farmer/presentation/ui/add_farmer_page.dart';
+import 'package:project_tani/feature/Farmer/presentation/ui/farmer_page.dart';
 import 'package:project_tani/feature/home/presentation/widgets/button_home.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,7 +15,6 @@ class HomePage extends StatelessWidget {
   List<String> title = ["Tambah Petani", "Catat Komoditas Buah",
     "Buat Transaksi", "Petani",
     "Komoditas Buah","Transaksi dengan Petani", "Transaksi dengan Pelanggan"];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,10 +25,10 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Hallo Budi,", style: Theme.of(context).textTheme.headline1),
+                    Text('Hallo Budi,', style: Theme.of(context).textTheme.headline1),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
-                      child: Text("Selamat beraktifitas hari ini", style: Theme.of(context).textTheme.headline2),
+                      child: Text('Selamat beraktifitas hari ini', style: Theme.of(context).textTheme.headline2),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
@@ -60,14 +61,44 @@ class HomePage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 32),
-                        child: Container(
+                        child: SizedBox(
                           height: MediaQuery.of(context).size.height,
                           child: GridView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                               itemCount: images.length,
-                              itemBuilder: (context, i) =>
-                                  ButtonHome(image: images[i], title: title[i]),
+                              itemBuilder: (context, i) {
+                              if(title[i] == 'Tambah Petani'){
+                                return ButtonHome(image: images[i], title: title[i],
+                                  onTap:(){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return AddFarmerPage();
+                                        },
+                                      ),
+                                    );
+                                  });
+                              }else if(title[i] == 'Petani'){
+                                return ButtonHome(image: images[i], title: title[i],
+                                    onTap:(){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return FarmerPage();
+                                          },
+                                        ),
+                                      );
+                                    });
+                              }
+                              else{
+                                return ButtonHome(image: images[i], title: title[i],
+                                    );
+                                }
+                              },
+
                             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
                                 mainAxisSpacing: 16
