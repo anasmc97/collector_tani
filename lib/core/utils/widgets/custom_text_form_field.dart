@@ -53,6 +53,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             },
             child: Icon(isObscure ? Icons.visibility_off : Icons.visibility),
         ) : null,
+          contentPadding: const EdgeInsets.symmetric(vertical: -10, horizontal: 10),
         hintText: hintext,
         hintStyle: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.normal, fontSize: 12),
         hoverColor: CustomColors.borderField,

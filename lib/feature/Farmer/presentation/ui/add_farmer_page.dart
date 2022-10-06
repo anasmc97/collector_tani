@@ -20,26 +20,33 @@ class AddFarmerPage extends StatelessWidget {
       backgroundColor: CustomColors.primary,
       body: SafeArea(
           child: Container(
-            padding: const EdgeInsets.only(top: 16),
+            //padding: const EdgeInsets.only(top: 8),
             child: Stack(
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 24),
-                      child: Icon(Icons.arrow_back, color: Colors.white,),
+                const Padding(
+                  padding: EdgeInsets.only(left: 24, top: 20),
+                  child: Icon(Icons.arrow_back, color: Colors.white,),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Text('Tentang Petani',
+                      style: Theme.of(context).textTheme.headline1!.copyWith(fontWeight: FontWeight.w500, color: Colors.white),
                     ),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(image: AssetImage('assets/Titik-titik.png'),
-                        ),
+                  ),
+                ),
+                Positioned(
+                  right: -10,
+                  top: -30,
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(image: AssetImage('assets/Titik-titik.png'),
                       ),
                     ),
-                  ],
+                  ),
                 ),
                 Align(
                   alignment: FractionalOffset.bottomCenter,
@@ -53,13 +60,9 @@ class AddFarmerPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: SingleChildScrollView(
                       child: Container(
-                        padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
-                        alignment: Alignment.topCenter,
+                        padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
                         child: Column(
                           children: [
-                            Text('Tentang Petani',
-                              style: Theme.of(context).textTheme.headline1!.copyWith(fontWeight: FontWeight.w500),
-                            ),
                             Form(
                               key: _formKey,
                               child: Builder(
@@ -68,7 +71,7 @@ class AddFarmerPage extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Container(
-                                          padding: const EdgeInsets.only(top: 32),
+                                          padding: const EdgeInsets.only(top: 16),
                                           child: Text('Nama',
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
                                                 fontSize: 16,
@@ -90,7 +93,7 @@ class AddFarmerPage extends StatelessWidget {
                                           ),
                                         ),
                                         Container(
-                                          padding: const EdgeInsets.only(top: 32),
+                                          padding: const EdgeInsets.only(top: 16),
                                           child: Text('Luas Lahan', style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
                                               fontSize: 16,
                                               color: CustomColors.colorsFontSecondary),
@@ -111,7 +114,7 @@ class AddFarmerPage extends StatelessWidget {
                                           ),
                                         ),
                                         Container(
-                                          padding: const EdgeInsets.only(top: 32),
+                                          padding: const EdgeInsets.only(top: 16),
                                           child: Text('Jumlah Pohon', style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
                                               fontSize: 16,
                                               color: CustomColors.colorsFontSecondary),
@@ -133,7 +136,7 @@ class AddFarmerPage extends StatelessWidget {
                                           ),
                                         ),
                                         Container(
-                                          padding: const EdgeInsets.only(top: 32),
+                                          padding: const EdgeInsets.only(top: 16),
                                           child: Text('Estimasi Jumlah Produksi', style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
                                               fontSize: 16,
                                               color: CustomColors.colorsFontSecondary),
@@ -154,8 +157,8 @@ class AddFarmerPage extends StatelessWidget {
                                             )
                                         ),
                                         Container(
-                                          padding: const EdgeInsets.only(top: 32),
-                                          child: Text('Koordinat Lahan', style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
+                                          padding: const EdgeInsets.only(top: 16),
+                                          child: Text('Lokasi Lahan', style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
                                               fontSize: 16,
                                               color: CustomColors.colorsFontSecondary),
                                             textAlign: TextAlign.start,),
@@ -164,22 +167,15 @@ class AddFarmerPage extends StatelessWidget {
                                             padding: const EdgeInsets.only(top: 8),
                                             child: CustomTextFormField(
                                               controller: koordinatLahanController,
-                                              hintext: 'Enter Your Koordinat Lahan',
+                                              hintext: 'Lokasi Lahan',
                                               validator: (value){
                                                 if(value!.trim().isEmpty){
-                                                  return 'Please enter your Koordinat Lahan';
+                                                  return 'Please enter your Lokasi Lahan';
                                                 }else{
                                                   return null;
                                                 }
                                               },
                                             )
-                                        ),
-                                        Container(
-                                          padding: const EdgeInsets.only(top: 8),
-                                          child: Text('cth: -8.5988404, 116.1514111  ', style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w400,
-                                              fontSize: 12,
-                                              color: CustomColors.colorsFontSecondary),
-                                            textAlign: TextAlign.start,),
                                         ),
 
                                       ],
@@ -188,7 +184,7 @@ class AddFarmerPage extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                                padding: const EdgeInsets.only(top: 48, bottom: 48),
+                                padding: const EdgeInsets.only(top: 24, bottom: 48),
                                 child: CustomButton('Tambah', color: CustomColors.buttonColor,
                                   onTap: (){
                                     if(_formKey.currentState?.validate() ?? false){

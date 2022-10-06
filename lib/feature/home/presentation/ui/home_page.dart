@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
      "assets/komoditas_buah.png","assets/transaksi.png", "assets/transaksi.png"];
   List<String> title = ["Tambah Petani", "Catat Komoditas Buah",
     "Buat Transaksi", "Petani",
-    "Komoditas Buah","Transaksi dengan Petani", "Transaksi dengan Pelanggan"];
+    "Komoditas Buah","Transaksi Petani", "Transaksi Pelanggan"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
