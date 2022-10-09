@@ -37,7 +37,6 @@ class DetailFarmerPage extends StatelessWidget {
                               width: 162,
                               height: 162,
                               decoration:  BoxDecoration(
-                                color: Colors.blue,
                                 shape: BoxShape.circle,
                                 image: DecorationImage(image: AssetImage(farmer!.image!),
                                   fit: BoxFit.fill

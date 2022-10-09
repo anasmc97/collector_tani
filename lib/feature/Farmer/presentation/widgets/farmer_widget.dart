@@ -23,7 +23,6 @@ class FarmerWidget extends StatelessWidget {
                     width: 56,
                     height: 56,
                     decoration:  BoxDecoration(
-                      color: Colors.blue,
                       shape: BoxShape.circle,
                       image: DecorationImage(image: AssetImage(image!),
                       ),

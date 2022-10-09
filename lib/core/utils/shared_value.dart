@@ -13,4 +13,5 @@ class CustomColors {
   static const Color iconColor = Color(0xFF2E3A59);
   static const Color iconForwardColor = Color(0xFF2E3A59);
   static const Color colorFontStatisticGlobal = Color(0xFF687089);
+  static const Color colorValidText = Color(0xFF5CB8E4);
 }

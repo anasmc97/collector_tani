@@ -1,5 +1,3 @@
-import 'package:email_validator/email_validator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/core/utils/widgets/custom_button.dart';

@@ -17,7 +17,7 @@ class Farmer{
 }
 
 List<Farmer> dummyListFarmer = [
-  Farmer(name: 'Imam', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: '-8.5988404, 116.1514111'),
-  Farmer(name: 'Anas', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: '-8.5988404, 116.1514111'),
-  Farmer(name: 'Wibi', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: '-8.5988404, 116.1514111'),
+  Farmer(name: 'Imam', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: 'Narmada'),
+  Farmer(name: 'Anas', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: 'Narmada'),
+  Farmer(name: 'Wibi', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: 'Narmada'),
 ];
