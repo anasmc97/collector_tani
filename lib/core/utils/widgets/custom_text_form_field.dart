@@ -6,12 +6,14 @@ class CustomTextFormField extends StatefulWidget {
   TextEditingController? controller;
   String? hintext;
   bool? isPasswordField;
+  bool? isDateField;
   bool? isNumber;
   String? Function(String?)? validator;
   CustomTextFormField({Key? key,
     this.controller,
     this.hintext,
     this.isPasswordField = false,
+    this.isDateField = false,
     this.isNumber,
     this.validator}) : super(key: key);
 
@@ -22,6 +24,7 @@ class CustomTextFormField extends StatefulWidget {
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool isObscure;
   late bool isPasswordField;
+  late bool isDateField;
   bool? isNumber;
   TextEditingController? controller;
   String? hintext;
@@ -30,6 +33,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   void initState() {
     isObscure = widget.isPasswordField!;
     isPasswordField = widget.isPasswordField!;
+    isDateField = widget.isDateField!;
     controller = widget.controller;
     hintext = widget.hintext;
     isNumber = widget.isNumber;
@@ -46,13 +50,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       controller: controller,
       decoration: InputDecoration(
         suffixIcon: isPasswordField ? GestureDetector(
-            onTap: (){
-              setState(() {
-                isObscure = !isObscure;
-              });
-            },
-            child: Icon(isObscure ? Icons.visibility_off : Icons.visibility),
-        ) : null,
+                      onTap: (){
+                        setState(() {
+                          isObscure = !isObscure;
+                        });
+                      },
+                      child: Icon(isObscure ? Icons.visibility_off : Icons.visibility),
+                      ) : isDateField ? GestureDetector(
+                          onTap: (){},
+                          child: const Icon(Icons.calendar_today_outlined, color: CustomColors.primary, size: 17,),
+                      ) : null,
           contentPadding: const EdgeInsets.symmetric(vertical: -10, horizontal: 10),
         hintText: hintext,
         hintStyle: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.normal, fontSize: 12),

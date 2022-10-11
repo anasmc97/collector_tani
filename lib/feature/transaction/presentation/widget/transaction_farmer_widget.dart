@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 
-class ComodityWidget extends StatelessWidget {
+class TransactionFarmerWidget extends StatelessWidget {
   final String? image;
   final String? name;
   final String? comodity;
@@ -11,7 +10,7 @@ class ComodityWidget extends StatelessWidget {
   final String? year;
   final bool isValid;
   final Function()? onTap;
-  const ComodityWidget({Key? key,
+  const TransactionFarmerWidget({Key? key,
     required this.image,
     required this.name,
     required this.comodity,
@@ -24,12 +23,13 @@ class ComodityWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            height: MediaQuery.of(context).size.height * 0.1,
+            height: MediaQuery.of(context).size.height * 0.12,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -95,6 +95,11 @@ class ComodityWidget extends StatelessWidget {
                                       ),
                                     ),
                                   ],
+                                ),
+                                Text('Jumlah Berat: 000 Kg', style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    color: CustomColors.primary
+                                  ),
                                 ),
                               ],
                             ),

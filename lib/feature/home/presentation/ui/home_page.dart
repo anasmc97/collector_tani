@@ -4,8 +4,11 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/Farmer/presentation/ui/add_farmer_page.dart';
 import 'package:project_tani/feature/Farmer/presentation/ui/farmer_page.dart';
+import 'package:project_tani/feature/comodity/presentation/ui/comodity.dart';
 import 'package:project_tani/feature/comodity/presentation/ui/select_farmer.dart';
 import 'package:project_tani/feature/home/presentation/widgets/button_home.dart';
+import 'package:project_tani/feature/transaction/presentation/ui/select_transaction.dart';
+import 'package:project_tani/feature/transaction/presentation/ui/transaction_farmer.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -101,6 +104,30 @@ class HomePage extends StatelessWidget {
                                         MaterialPageRoute(
                                           builder: (context) {
                                             return SelectFarmerPage();
+                                          },
+                                        ),
+                                      );
+                                    });
+                              }else if(title[i] == 'Komoditas Buah'){
+                                return ButtonHome(image: images[i], title: title[i],
+                                    onTap:(){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return ComodityPage();
+                                          },
+                                        ),
+                                      );
+                                    });
+                              }else if(title[i] == 'Buat Transaksi'){
+                                return ButtonHome(image: images[i], title: title[i],
+                                    onTap:(){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return SelectTransaction();
                                           },
                                         ),
                                       );

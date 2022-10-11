@@ -3,10 +3,12 @@ import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/comodity/domain/entity/comodity.dart';
 import 'package:project_tani/feature/comodity/presentation/ui/detail_comodity.dart';
 import 'package:project_tani/feature/comodity/presentation/widgets/comodity_widget.dart';
+import 'package:project_tani/feature/transaction/presentation/ui/transacation_farmer_detail.dart';
+import 'package:project_tani/feature/transaction/presentation/widget/transaction_farmer_widget.dart';
 
-class ComodityPage extends StatelessWidget {
-  ComodityPage({Key? key}) : super(key: key);
-  final List<String> listComodity = ['Mangga, Durian', 'Rambutan, Manggis', 'Durian, Manggis'];
+class AddFarmerTransactionPage extends StatelessWidget {
+  const AddFarmerTransactionPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,20 +28,23 @@ class ComodityPage extends StatelessWidget {
                                     alignment: Alignment.centerLeft,
                                     child: const Icon(Icons.arrow_back)),
                                 Center(
-                                  child: Text('Komoditas Buah',
+                                  child: Text('Buat Transaksi Petani',
                                     style: Theme.of(context).textTheme.headline1!.copyWith(color: CustomColors.colorsFontPrimary),
                                   ),
                                 ),
                               ],
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 54.0),
+                            child: Text('Pilih komoditas buah', style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500, fontSize: 16),),
+                          ),
                           Container(
                             height: MediaQuery.of(context).size.height,
                             width: MediaQuery.of(context).size.width,
-                            padding: const EdgeInsets.only(top: 32.0),
                             child: ListView.builder(
                                 itemCount: dummyListComodity.length,
-                                itemBuilder: (context, index) => ComodityWidget(
+                                itemBuilder: (context, index) => TransactionFarmerWidget(
                                   image: dummyListComodity[index].image,
                                   name: dummyListComodity[index].farmer!.name,
                                   comodity: dummyListComodity[index].comodityName,
@@ -52,7 +57,7 @@ class ComodityPage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return DetailComodity();
+                                          return TransactionfarmerDetail();
                                         },
                                       ),
                                     );
@@ -69,4 +74,3 @@ class ComodityPage extends StatelessWidget {
     );
   }
 }
-
