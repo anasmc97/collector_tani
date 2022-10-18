@@ -1,18 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
+import 'package:project_tani/core/utils/widgets/custom_button.dart';
+import 'package:project_tani/core/utils/widgets/custom_text_form_field.dart';
 import 'package:project_tani/feature/comodity/domain/entity/comodity.dart';
 import 'package:project_tani/feature/transaction/presentation/widget/transaction_farmer_widget.dart';
 
 class TransactionfarmerDetail extends StatelessWidget {
-  const TransactionfarmerDetail({Key? key}) : super(key: key);
+  TransactionfarmerDetail({Key? key}) : super(key: key);
+  TextEditingController qtyController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-            child: SingleChildScrollView(
-                child: Container(
+            child: Stack(
+              children: [
+                Container(
                     padding: const EdgeInsets.only(left: 24, right: 24),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,53 +54,97 @@ class TransactionfarmerDetail extends StatelessWidget {
                               ),
                           Padding(
                             padding: const EdgeInsets.only(top: 36.0),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              height: MediaQuery.of(context).size.height * 0.25,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: const BorderRadius.all(Radius.circular(10),
-                                ),
-                                border: Border.all(
-                                    color: CustomColors.borderField
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('Kuantitas(Kg)', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w500, fontSize: 16),
-                                      ),
-                                      Text('0000 Kg', style: Theme.of(context).textTheme.headline1!.copyWith(fontWeight: FontWeight.w500, fontSize: 16))
-                                    ],
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  child: Text('Kuantitas(Kg)', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w500, fontSize: 16, color: CustomColors.colorsFontPrimary),
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('Harga', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w500, fontSize: 16),
-                                      ),
-                                      Text('Rp 0000', style: Theme.of(context).textTheme.headline1!.copyWith(fontWeight: FontWeight.w500, fontSize: 16))
-                                    ],
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  child: CustomTextFormField(
+                                      controller: qtyController,
+                                      hintext: 'Enter Quantity Comodity (Kg)',
+                                      validator: (value) {
+                                        if(value!.trim().isEmpty){
+                                          return 'Please enter your Quantitys';
+                                        }else{
+                                          return null;
+                                        }
+                                      }
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('Total Harga', style: Theme.of(context).textTheme.headline1!,
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  child: Text('Harga', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w500, fontSize: 16, color: CustomColors.colorsFontPrimary),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  child: CustomTextFormField(
+                                      controller: priceController,
+                                      hintext: 'Enter Price Comodity',
+                                      validator: (value) {
+                                        if(value!.trim().isEmpty){
+                                          return 'Please enter your Price';
+                                        }else{
+                                          return null;
+                                        }
+                                      }
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 16.0),
+                                  child: Container(
+                                    height: 76,
+                                    padding: const EdgeInsets.only(top: 8),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: const BorderRadius.all(Radius.circular(10),
                                       ),
-                                      Text('Rp 0000', style: Theme.of(context).textTheme.headline1!.copyWith(color: CustomColors.primary))
-                                    ],
-                                  )
-                                ],
-                              ),
+                                      border: Border.all(
+                                          width: 2,
+                                          color: CustomColors.borderField
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 8.0),
+                                          child: Text('Total Harga', style: Theme.of(context).textTheme.headline1!,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(right: 8.0),
+                                          child: Text('Rp 0000', style: Theme.of(context).textTheme.headline1!.copyWith(color: CustomColors.primary)),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+                              ],
                             ),
                           ),
 
                         ]
                     )
-                )
+                ),
+                Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 24),
+                      padding: const EdgeInsets.only(bottom: 24.0),
+                      child: CustomButton('Simpan', color: CustomColors.buttonColor,
+                        onTap: (){
+                        },
+                      ),
+                    )
+                ),
+              ],
             )
         )
     );

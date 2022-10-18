@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
+import 'package:project_tani/feature/transaction/presentation/ui/transaction_customer.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/transaction_farmer.dart';
 
 class SelectTransaction extends StatelessWidget {
@@ -59,14 +60,26 @@ class SelectTransaction extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 50.0),
-                            child: Container(
-                              width: 358,
-                              height: 227,
-                              decoration:  const BoxDecoration(
-                                borderRadius:  BorderRadius.all(Radius.circular(10),
-                                ),
-                                image: DecorationImage(image: AssetImage('assets/transaksi pelanggan.png'),
-                                    fit: BoxFit.fill
+                            child: InkWell(
+                              onTap: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return AddCustomerTransactionPage();
+                                    },
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: 358,
+                                height: 227,
+                                decoration:  const BoxDecoration(
+                                  borderRadius:  BorderRadius.all(Radius.circular(10),
+                                  ),
+                                  image: DecorationImage(image: AssetImage('assets/transaksi pelanggan.png'),
+                                      fit: BoxFit.fill
+                                  ),
                                 ),
                               ),
                             ),
