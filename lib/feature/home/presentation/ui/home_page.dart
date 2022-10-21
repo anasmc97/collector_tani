@@ -9,6 +9,8 @@ import 'package:project_tani/feature/comodity/presentation/ui/select_farmer.dart
 import 'package:project_tani/feature/home/presentation/widgets/button_home.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/select_transaction.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/transaction_farmer.dart';
+import 'package:project_tani/feature/transaction/presentation/ui/transaction_with_customer.dart';
+import 'package:project_tani/feature/transaction/presentation/ui/transaction_with_farmer.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -116,6 +118,30 @@ class HomePage extends StatelessWidget {
                                         MaterialPageRoute(
                                           builder: (context) {
                                             return ComodityPage();
+                                          },
+                                        ),
+                                      );
+                                    });
+                              }else if(title[i] == 'Transaksi Petani'){
+                                return ButtonHome(image: images[i], title: title[i],
+                                    onTap:(){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return TransactionWithFarmerPage();
+                                          },
+                                        ),
+                                      );
+                                    });
+                              }else if(title[i] == 'Transaksi Pelanggan'){
+                                return ButtonHome(image: images[i], title: title[i],
+                                    onTap:(){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return TransactionWithCustomerPage();
                                           },
                                         ),
                                       );
