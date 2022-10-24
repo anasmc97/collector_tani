@@ -3,11 +3,11 @@ import 'package:project_tani/core/utils/shared_value.dart';
 
 class Helper{
   static navigator(BuildContext context, Widget widget) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (_) => widget,
-      ),
-    );
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) {
+      return widget;
+    }));
   }
 
 

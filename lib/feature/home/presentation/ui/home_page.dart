@@ -1,26 +1,46 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:project_tani/core/helper/helper.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/Farmer/presentation/ui/add_farmer_page.dart';
 import 'package:project_tani/feature/Farmer/presentation/ui/farmer_page.dart';
 import 'package:project_tani/feature/comodity/presentation/ui/comodity.dart';
 import 'package:project_tani/feature/comodity/presentation/ui/select_farmer.dart';
 import 'package:project_tani/feature/home/presentation/widgets/button_home.dart';
+import 'package:project_tani/feature/login/presentation/bloc/auth_bloc.dart';
+import 'package:project_tani/feature/login/presentation/ui/login_page.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/select_transaction.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/transaction_farmer.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/transaction_with_customer.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/transaction_with_farmer.dart';
+import 'package:project_tani/injection_container.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+
   HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  AuthBloc? _authBloc;
   List<String> images = ["assets/Icon.png", "assets/catat_komoditas_buah.png",
      "assets/buat_transaksi.png", "assets/petani.png",
      "assets/komoditas_buah.png","assets/transaksi.png", "assets/transaksi.png"];
+
   List<String> title = ["Tambah Petani", "Catat Komoditas Buah",
     "Buat Transaksi", "Petani",
     "Komoditas Buah","Transaksi Petani", "Transaksi Pelanggan"];
+
+  @override
+  void initState() {
+    _authBloc = BlocProvider.of<AuthBloc>(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +51,21 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Hallo Budi,', style: Theme.of(context).textTheme.headline1),
+                    BlocListener<AuthBloc, AuthState>(
+                        listener: (context, state) {
+                          if(state is AuthInitial){
+                            Helper.navigator(context, BlocProvider(
+                              create: (context) => sl<AuthBloc>(),
+                              child: LoginPage(),
+                            ));
+                          }
+                        },
+                        child: GestureDetector(
+                        onTap: (){
+                          _authBloc!.add(LogoutEvent());
+                        },
+                        child: Text('Hallo Budi,', style: Theme.of(context).textTheme.headline1)),
+),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Text('Selamat beraktifitas hari ini', style: Theme.of(context).textTheme.headline2),

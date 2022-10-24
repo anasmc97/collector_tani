@@ -1,6 +1,6 @@
-import 'package:project_tani/feature/login/domain/entities/user.dart';
+import 'package:project_tani/feature/login/data/models/auth_model.dart';
 
 abstract class AuthRepository {
-  Future<User?> signUp(String? name, String? phoneNumber, String? email, String? password);
-  Future<User?> login(String? email, String? password);
+  Future<AuthModel?> signUp(String? name, String? phoneNumber, String? email, String? password);
+  Future<AuthModel?> login(String? email, String? password);
 }

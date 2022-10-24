@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:project_tani/core/helper/helper.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/core/utils/widgets/custom_button.dart';
@@ -8,6 +9,7 @@ import 'package:project_tani/core/utils/widgets/custom_text_form_field.dart';
 import 'package:project_tani/feature/home/presentation/ui/home_page.dart';
 import 'package:project_tani/feature/login/presentation/bloc/auth_bloc.dart';
 import 'package:project_tani/feature/login/presentation/ui/login_page.dart';
+import 'package:project_tani/injection_container.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key? key}) : super(key: key);
@@ -186,7 +188,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 BlocConsumer<AuthBloc, AuthState>(
                   listener: (context, state) {
                     if(state is AuthDataLoaded){
-                      Helper.navigator(context, HomePage());
+                      Helper.navigator(context, BlocProvider(
+                        create: (context) => sl<AuthBloc>(),
+                        child: HomePage(),
+                      ));
+                    }else if(state is AuthDataError){
+                      showSimpleNotification(
+                          Text(state.message ?? 'terjadi kesalahan'),
+                          background: CustomColors.dangerColor);
                     }
                   },
                   builder: (context, state) {

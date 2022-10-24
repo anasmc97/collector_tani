@@ -1,9 +1,9 @@
 import 'dart:ui';
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:project_tani/core/helper/helper.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/core/utils/widgets/custom_button.dart';
@@ -11,6 +11,7 @@ import 'package:project_tani/core/utils/widgets/custom_text_form_field.dart';
 import 'package:project_tani/feature/home/presentation/ui/home_page.dart';
 import 'package:project_tani/feature/login/presentation/bloc/auth_bloc.dart';
 import 'package:project_tani/feature/login/presentation/ui/register_page.dart';
+import 'package:project_tani/injection_container.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -128,10 +129,18 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ),
                 
-                BlocConsumer<AuthBloc, AuthState>(
+                BlocConsumer(
+                  bloc: _authBloc,
                   listener: (context, state) {
                     if(state is AuthDataLoaded){
-                      Helper.navigator(context, HomePage());
+                      Helper.navigator(context, BlocProvider(
+                        create: (context) => sl<AuthBloc>(),
+                        child: HomePage(),
+                      ));
+                    }else if(state is AuthDataError){
+                      showSimpleNotification(
+                          Text(state.message ?? 'terjadi kesalahan'),
+                          background: CustomColors.dangerColor);
                     }
                   },
                   builder: (context, state) {
@@ -153,8 +162,8 @@ class _LoginPageState extends State<LoginPage> {
                       );
                     }
 
-  },
-),
+                  },
+                ),
                 Container(
                   padding: const EdgeInsets.only(top: 24, bottom: 40),
                   child: Row(
@@ -167,7 +176,10 @@ class _LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.only(left: 8),
                         child: GestureDetector(
                           onTap: (){
-                            Helper.navigator(context, RegisterPage());
+                            Helper.navigator(context, BlocProvider(
+                              create: (context) => sl<AuthBloc>(),
+                              child: RegisterPage(),
+                            ));
                           },
                           child: Text('Register', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.normal,
                               color: CustomColors.primary),

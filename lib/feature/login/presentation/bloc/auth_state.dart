@@ -5,7 +5,7 @@ abstract class AuthState extends Equatable{}
 
 class AuthInitial extends AuthState {
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 class AuthLoading extends AuthState {
   @override
