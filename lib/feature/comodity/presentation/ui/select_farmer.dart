@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
-import 'package:project_tani/feature/Farmer/domain/entity.dart';
-import 'package:project_tani/feature/Farmer/presentation/ui/detail_farmer_page.dart';
+import 'package:project_tani/feature/Farmer/domain/entities/farmer.dart';
 import 'package:project_tani/feature/Farmer/presentation/widgets/farmer_widget.dart';
 import 'package:project_tani/feature/comodity/presentation/ui/select_comodity.dart';
 

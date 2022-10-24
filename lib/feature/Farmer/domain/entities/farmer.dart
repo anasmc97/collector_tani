@@ -1,4 +1,6 @@
-class Farmer{
+import 'package:equatable/equatable.dart';
+
+class Farmer extends Equatable{
   final String? name;
   final String? image;
   final String? luasLahan;
@@ -14,6 +16,17 @@ class Farmer{
     this.koordinatLahan,
     this.luasLahan
   });
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+    name,
+    image,
+    estimasiJumlahProduksi,
+    jumlahPohon,
+    koordinatLahan,
+    luasLahan,
+  ];
 }
 
 List<Farmer> dummyListFarmer = [

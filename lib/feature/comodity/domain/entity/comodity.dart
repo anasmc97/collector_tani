@@ -1,4 +1,4 @@
-import 'package:project_tani/feature/Farmer/domain/entity.dart';
+import 'package:project_tani/feature/Farmer/domain/entities/farmer.dart';
 
 class Comodity{
   final Farmer? farmer;

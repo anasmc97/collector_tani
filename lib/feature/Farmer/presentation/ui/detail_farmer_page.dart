@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/core/utils/widgets/custom_button.dart';
 import 'package:project_tani/core/utils/widgets/custom_text_form_field.dart';
-import 'package:project_tani/feature/Farmer/domain/entity.dart';
+import 'package:project_tani/feature/Farmer/domain/entities/farmer.dart';
 
 class DetailFarmerPage extends StatelessWidget {
   Farmer? farmer;

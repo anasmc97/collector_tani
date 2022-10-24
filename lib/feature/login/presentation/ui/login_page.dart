@@ -3,19 +3,38 @@ import 'dart:ui';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_tani/core/helper/helper.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/core/utils/widgets/custom_button.dart';
 import 'package:project_tani/core/utils/widgets/custom_text_form_field.dart';
 import 'package:project_tani/feature/home/presentation/ui/home_page.dart';
+import 'package:project_tani/feature/login/presentation/bloc/auth_bloc.dart';
 import 'package:project_tani/feature/login/presentation/ui/register_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  AuthBloc? _authBloc;
+
+  @override
+  void initState() {
+    _authBloc = BlocProvider.of<AuthBloc>(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -109,23 +128,33 @@ class LoginPage extends StatelessWidget {
                   )
                 ),
                 
-                Padding(
-                    padding: const EdgeInsets.only(top: 48),
-                    child: CustomButton('Login', color: CustomColors.buttonColor,
-                      onTap: (){
-                      if(_formKey.currentState?.validate() ?? false){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return HomePage();
+                BlocConsumer<AuthBloc, AuthState>(
+                  listener: (context, state) {
+                    if(state is AuthDataLoaded){
+                      Helper.navigator(context, HomePage());
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is AuthLoading){
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 48.0),
+                        child: Center(child: CircularProgressIndicator(color: CustomColors.primary)),
+                      );
+                    }else{
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 48),
+                        child: CustomButton('Login', color: CustomColors.buttonColor,
+                          onTap: (){
+                            if(_formKey.currentState?.validate() ?? false){
+                              _authBloc!.add(LoginEvent(email: emailController.text, password: passwordController.text));
+                            }
                           },
                         ),
                       );
                     }
-                    },
-                    ),
-                ),
+
+  },
+),
                 Container(
                   padding: const EdgeInsets.only(top: 24, bottom: 40),
                   child: Row(
@@ -138,14 +167,7 @@ class LoginPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 8),
                         child: GestureDetector(
                           onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                builder: (context) {
-                                return RegisterPage();
-                                },
-                                ),
-                              );
+                            Helper.navigator(context, RegisterPage());
                           },
                           child: Text('Register', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.normal,
                               color: CustomColors.primary),
