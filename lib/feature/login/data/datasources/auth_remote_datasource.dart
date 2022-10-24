@@ -20,8 +20,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try{
       response = await dio.post(api, data: data);
       if (response.statusCode == 200) {
-        final body = response.data;
-        return AuthModel.fromJson(body);
+        final body = response.data['data']['user'];
+        AuthModel authModel = AuthModel.fromJson(body);
+        return authModel.copyWith(token: response.data['data']['token']);
       } else {
         return null;
       }
@@ -45,7 +46,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try{
       response = await dio.post(api,
           data: data,
-          options: Options(headers: header)
       );
       if (response.statusCode == 200) {
         final body = response.data;

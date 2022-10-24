@@ -16,6 +16,10 @@ class LoginEvent extends AuthEvent {
     password
   ];
 }
+class AutoLoginEvent extends AuthEvent {
+  @override
+  List<Object?> get props => [];
+}
 
 class SignUpEvent extends AuthEvent {
   final String? email;

@@ -18,6 +18,9 @@ dependencies:
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
   get_it: ^7.2.0
+  overlay_support: ^2.0.1
+  flutter_flipperkit: ^0.0.28
+  shared_preferences:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

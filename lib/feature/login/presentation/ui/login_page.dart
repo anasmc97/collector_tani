@@ -1,9 +1,9 @@
 import 'dart:ui';
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:project_tani/core/helper/helper.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/core/utils/widgets/custom_button.dart';
@@ -132,6 +132,10 @@ class _LoginPageState extends State<LoginPage> {
                   listener: (context, state) {
                     if(state is AuthDataLoaded){
                       Helper.navigator(context, HomePage());
+                    }else if(state is AuthDataError){
+                      showSimpleNotification(
+                          Text(state.message ?? 'terjadi kesalahan'),
+                          background: CustomColors.dangerColor);
                     }
                   },
                   builder: (context, state) {
