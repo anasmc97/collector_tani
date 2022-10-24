@@ -12,9 +12,9 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final LoginUsecase login;
-  final SignUpUsecase signUp;
-  AuthBloc(this.login, this.signUp) : super(AuthInitial()) {
+  final LoginUsecase? login;
+  final SignUpUsecase? signUp;
+  AuthBloc({required this.login, required this.signUp}) : super(AuthInitial()) {
     on<LoginEvent>(_mapLoginEvent);
     on<SignUpEvent>(_mapSignUpEvent);
   }
@@ -23,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     LoginEvent event, Emitter<AuthState> emit) async{
       emit(AuthLoading());
       try {
-        final User? data = await login.call(ParamsLogin(email: event.email, password: event.password));
+        final User? data = await login!.call(ParamsLogin(email: event.email, password: event.password));
         if (data == null) {
           emit(AuthEmpty());
         } else {
@@ -39,7 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
     try {
       final User? data =
-      await signUp.call(ParamsSignUp(email: event.email, password: event.password, name: event.name, phoneNumber: event.phoneNumber));
+      await signUp!.call(ParamsSignUp(email: event.email, password: event.password, name: event.name, phoneNumber: event.phoneNumber));
       if (data == null) {
         emit(AuthEmpty());
       } else {
