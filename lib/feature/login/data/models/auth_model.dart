@@ -17,33 +17,18 @@ class AuthModel extends User {
 
   factory AuthModel.fromJson(Map<String, dynamic> json) {
     return AuthModel(
-      name: json['name'],
-      phoneNumber: json['phone_number'],
-      email: json['email'],
-      id: json['id'],
-      token: json['token']
+      name: json['data']['user']['name'],
+      phoneNumber: json['data']['user']['phone_number'],
+      email: json['data']['user']['email'],
+      id: json['data']['user']['id'],
+      token: json['token'],
     );
   }
-
-  AuthModel copyWith({
-    String? name,
-    String? phoneNumber,
-    String? email,
-    String? id,
-    String? token
-  }){
-    return AuthModel(
-        name: name ?? this.name,
-        phoneNumber: phoneNumber ?? this.phoneNumber,
-        email: email ?? this.email,
-        id: id ?? this.id,
-        token: token ?? this.token);
-}
 
   Map<String, dynamic> toJson() {
     return {
       'name': name,
-      'phone_number': phoneNumber,
+      'phoneNumber': phoneNumber,
       'email': email,
       'id': id,
       'token': token,
