@@ -1,6 +1,5 @@
 import 'package:project_tani/feature/login/data/datasources/auth_remote_datasource.dart';
 import 'package:project_tani/feature/login/data/models/auth_model.dart';
-import 'package:project_tani/feature/login/domain/entities/user.dart';
 import 'package:project_tani/feature/login/domain/repositories/auth_repositories.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

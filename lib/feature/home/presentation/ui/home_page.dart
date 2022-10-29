@@ -13,7 +13,6 @@ import 'package:project_tani/feature/login/data/models/auth_model.dart';
 import 'package:project_tani/feature/login/presentation/bloc/auth_bloc.dart';
 import 'package:project_tani/feature/login/presentation/ui/login_page.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/select_transaction.dart';
-import 'package:project_tani/feature/transaction/presentation/ui/transaction_farmer.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/transaction_with_customer.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/transaction_with_farmer.dart';
 import 'package:project_tani/injection_container.dart';

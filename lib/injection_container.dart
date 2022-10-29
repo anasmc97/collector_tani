@@ -6,7 +6,6 @@ import 'package:project_tani/feature/login/domain/usecase/login_usecase.dart';
 import 'package:project_tani/feature/login/domain/usecase/logout_usecase.dart';
 import 'package:project_tani/feature/login/domain/usecase/sign_up_usecase.dart';
 import 'package:project_tani/feature/login/presentation/bloc/auth_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
 
