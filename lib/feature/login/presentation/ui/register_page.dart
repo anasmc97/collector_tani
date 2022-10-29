@@ -190,7 +190,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     if(state is AuthDataLoaded){
                       Helper.navigator(context, BlocProvider(
                         create: (context) => sl<AuthBloc>(),
-                        child: HomePage(),
+                        child: HomePage(authModel: state.authModel,),
                       ));
                     }else if(state is AuthDataError){
                       showSimpleNotification(

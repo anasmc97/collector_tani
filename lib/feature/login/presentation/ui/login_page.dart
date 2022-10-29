@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                     if(state is AuthDataLoaded){
                       Helper.navigator(context, BlocProvider(
                       create: (context) => sl<AuthBloc>(),
-                      child: HomePage(),
+                      child: HomePage(authModel: state.authModel,),
                     ));
                     }
                   },

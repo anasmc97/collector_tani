@@ -7,7 +7,7 @@ import 'package:project_tani/core/error/error.dart';
 abstract class AuthRemoteDataSource {
   Future<AuthModel?> signUp(String? name, String? phoneNumber, String? email, String? password);
   Future<AuthModel?> login(String? email, String? password);
-  Future<void> logout();
+  Future<void> logout(String? token);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -63,12 +63,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<void> logout() async {
+  Future<void> logout(String? token) async {
     final api = 'http://192.168.1.7:8000/api/logout';
 
     final dio = Dio();
     try{
-      await dio.post(api);
+      await dio.post(api, options: Options(headers:{"Authorization":"Bearer $token"}));
     }catch (e){
       if (kDebugMode) {
         print(e);

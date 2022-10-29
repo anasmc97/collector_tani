@@ -1,12 +1,9 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:project_tani/core/usecase/usecase.dart';
 import 'package:project_tani/feature/login/data/models/auth_model.dart';
-import 'package:project_tani/feature/login/domain/entities/user.dart';
 
 import 'package:project_tani/feature/login/domain/usecase/login_usecase.dart';
 import 'package:project_tani/feature/login/domain/usecase/logout_usecase.dart';
@@ -37,7 +34,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         } else {
           final sharedPreferences = await SharedPreferences.getInstance();
           sharedPreferences.setString('user', json.encode(data.toJson()));
-          emit(AuthDataLoaded(user: data));
+          emit(AuthDataLoaded(authModel: data));
         }
       } catch (e) {
         emit(AuthDataError(message: e.toString()));
@@ -55,22 +52,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         final sharedPreferences = await SharedPreferences.getInstance();
         sharedPreferences.setString('user', json.encode(data.toJson()));
-        emit(AuthDataLoaded(user: data));
+        emit(AuthDataLoaded(authModel: data));
       }
     } catch (e) {
       emit(AuthDataError(message: e.toString()));
     }
   }
 
-  void _mapAutoLoginEvent(AutoLoginEvent, Emitter<AuthState> emit) async {
-      User? user;
+  void _mapAutoLoginEvent(AutoLoginEvent event, Emitter<AuthState> emit) async {
+    AuthModel? authModel;
         final sharedPreferences = await SharedPreferences.getInstance();
       if(sharedPreferences.containsKey('user')){
         String? data = sharedPreferences.getString('user');
         if(data != null){
           final dataJson = json.decode(data);
-          user = AuthModel.fromJson(dataJson);
-          emit(AuthDataLoaded(user: user));
+          authModel = AuthModel.fromJson(dataJson);
+          emit(AuthDataLoaded(authModel: authModel));
         }else{
           emit(AuthInitial());
         }
@@ -80,8 +77,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   }
 
-  void _mapLogoutEvent(AutoLoginEvent, Emitter<AuthState> emit) async {
-    await logout!.call(NoParams());
+  void _mapLogoutEvent(LogoutEvent event, Emitter<AuthState> emit) async {
+    await logout!.call(ParamsLogout(token: event.token));
     final sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.remove('user');
     emit(AuthInitial());

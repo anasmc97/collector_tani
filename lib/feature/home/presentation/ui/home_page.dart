@@ -9,6 +9,7 @@ import 'package:project_tani/feature/Farmer/presentation/ui/farmer_page.dart';
 import 'package:project_tani/feature/comodity/presentation/ui/comodity.dart';
 import 'package:project_tani/feature/comodity/presentation/ui/select_farmer.dart';
 import 'package:project_tani/feature/home/presentation/widgets/button_home.dart';
+import 'package:project_tani/feature/login/data/models/auth_model.dart';
 import 'package:project_tani/feature/login/presentation/bloc/auth_bloc.dart';
 import 'package:project_tani/feature/login/presentation/ui/login_page.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/select_transaction.dart';
@@ -18,8 +19,9 @@ import 'package:project_tani/feature/transaction/presentation/ui/transaction_wit
 import 'package:project_tani/injection_container.dart';
 
 class HomePage extends StatefulWidget {
+  AuthModel? authModel;
 
-  HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key, this.authModel}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -27,6 +29,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   AuthBloc? _authBloc;
+  AuthModel? _authModel;
   List<String> images = ["assets/Icon.png", "assets/catat_komoditas_buah.png",
      "assets/buat_transaksi.png", "assets/petani.png",
      "assets/komoditas_buah.png","assets/transaksi.png", "assets/transaksi.png"];
@@ -38,6 +41,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _authBloc = BlocProvider.of<AuthBloc>(context);
+    _authModel = widget.authModel;
     super.initState();
   }
 
@@ -62,10 +66,10 @@ class _HomePageState extends State<HomePage> {
                         },
                         child: GestureDetector(
                         onTap: (){
-                          _authBloc!.add(LogoutEvent());
+                          _authBloc!.add(LogoutEvent(token: _authModel!.token));
                         },
-                        child: Text('Hallo Budi,', style: Theme.of(context).textTheme.headline1)),
-),
+                        child: Text('Hallo ' + _authModel!.name! + ',', style: Theme.of(context).textTheme.headline1)),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Text('Selamat beraktifitas hari ini', style: Theme.of(context).textTheme.headline2),

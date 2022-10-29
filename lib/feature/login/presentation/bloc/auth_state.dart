@@ -16,10 +16,10 @@ class AuthEmpty extends AuthState {
   List<Object?> get props => [];
 }
 class AuthDataLoaded extends AuthState {
-  final User? user;
-  AuthDataLoaded({required this.user});
+  final AuthModel? authModel;
+  AuthDataLoaded({required this.authModel});
   @override
-  List<Object?> get props => [user];
+  List<Object?> get props => [authModel];
 }
 class AuthDataError extends AuthState {
   final String? message;

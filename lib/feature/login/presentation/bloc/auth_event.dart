@@ -42,7 +42,9 @@ class SignUpEvent extends AuthEvent {
 }
 
 class LogoutEvent extends AuthEvent {
+  String? token;
+  LogoutEvent({this.token});
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [token];
 }
 

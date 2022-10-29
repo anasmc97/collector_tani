@@ -18,7 +18,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> logout() {
-    return remoteDataSource.logout();
+  Future<void> logout(String? token) {
+    return remoteDataSource.logout(token);
   }
 }
