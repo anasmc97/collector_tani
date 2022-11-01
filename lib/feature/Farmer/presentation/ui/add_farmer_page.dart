@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/core/utils/widgets/custom_button.dart';
 import 'package:project_tani/core/utils/widgets/custom_text_form_field.dart';
+import 'package:project_tani/feature/Farmer/presentation/farmer_bloc/farmer_bloc.dart';
 import 'package:project_tani/feature/home/presentation/ui/home_page.dart';
 
 class AddFarmerPage extends StatelessWidget {
-  AddFarmerPage({Key? key}) : super(key: key);
+  String? token;
+  AddFarmerPage({Key? key, this.token}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController landSizeController = TextEditingController();
+  TextEditingController numberTreeController = TextEditingController();
+  TextEditingController estimationProductionController = TextEditingController();
+  TextEditingController landLocationController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameController = TextEditingController();
-    TextEditingController luasLahanController = TextEditingController();
-    TextEditingController jumlahPohonController = TextEditingController();
-    TextEditingController estimasiJumlahProduksiController = TextEditingController();
-    TextEditingController koordinatLahanController = TextEditingController();
+    FarmerBloc? _famerBloc = BlocProvider.of<FarmerBloc>(context);
     return Scaffold(
       backgroundColor: CustomColors.primary,
       body: SafeArea(
@@ -80,10 +85,10 @@ class AddFarmerPage extends StatelessWidget {
                                           padding: const EdgeInsets.only(top: 8),
                                           child: CustomTextFormField(
                                               controller: nameController,
-                                              hintext: 'Enter Your Full Name',
+                                              hintext: 'Masukkan Nama Petani',
                                               validator: (value){
                                                 if(value!.trim().isEmpty){
-                                                  return 'Please enter your Full Name';
+                                                  return 'Masukkan Nama Petani';
                                                 }else{
                                                   return null;
                                                 }
@@ -100,11 +105,12 @@ class AddFarmerPage extends StatelessWidget {
                                         Container(
                                           padding: const EdgeInsets.only(top: 8),
                                           child: CustomTextFormField(
-                                              controller: luasLahanController,
-                                              hintext: 'Enter Your Luas Lahan',
+                                            isNumber: true,
+                                              controller: landSizeController,
+                                              hintext: 'Masukkan Luas Lahan',
                                               validator: (value) {
                                                 if(value!.trim().isEmpty){
-                                                  return 'Please enter your Luas Lahan';
+                                                  return 'Masukkan Luas Lahan';
                                                 }else{
                                                   return null;
                                                 }
@@ -121,12 +127,12 @@ class AddFarmerPage extends StatelessWidget {
                                         Container(
                                           padding: const EdgeInsets.only(top: 8),
                                           child: CustomTextFormField(
-                                            controller: jumlahPohonController,
-                                            hintext: 'Enter Your Jumlah Pohon',
+                                            controller: numberTreeController,
+                                            hintext: 'Masukkan Jumlah Pohon',
                                             isNumber: true,
                                             validator: (value){
                                               if(value!.trim().isEmpty){
-                                                return 'Please enter your Jumlah Pohon';
+                                                return 'Masukkan Jumlah Pohon';
                                               }else{
                                                 return null;
                                               }
@@ -143,11 +149,12 @@ class AddFarmerPage extends StatelessWidget {
                                         Container(
                                             padding: const EdgeInsets.only(top: 8),
                                             child: CustomTextFormField(
-                                              controller: estimasiJumlahProduksiController,
-                                              hintext: 'Enter Your Estimasi Jumlah Produksi',
+                                              isNumber: true,
+                                              controller: estimationProductionController,
+                                              hintext: 'Masukkan Estimasi Jumlah Produksi',
                                               validator: (value){
                                                 if(value!.trim().isEmpty){
-                                                  return 'Please enter your Estimasi Jumlah Produksi';
+                                                  return 'Masukkan Estimasi Jumlah Produksi';
                                                 }else{
                                                   return null;
                                                 }
@@ -164,11 +171,11 @@ class AddFarmerPage extends StatelessWidget {
                                         Container(
                                             padding: const EdgeInsets.only(top: 8),
                                             child: CustomTextFormField(
-                                              controller: koordinatLahanController,
-                                              hintext: 'Lokasi Lahan',
+                                              controller: landLocationController,
+                                              hintext: 'Masukkan Lokasi Lahan',
                                               validator: (value){
                                                 if(value!.trim().isEmpty){
-                                                  return 'Please enter your Lokasi Lahan';
+                                                  return 'Masukkan Lokasi Lahan';
                                                 }else{
                                                   return null;
                                                 }
@@ -181,22 +188,48 @@ class AddFarmerPage extends StatelessWidget {
                                   }
                               ),
                             ),
-                            Padding(
-                                padding: const EdgeInsets.only(top: 24, bottom: 48),
-                                child: CustomButton('Tambah', color: CustomColors.buttonColor,
-                                  onTap: (){
-                                    if(_formKey.currentState?.validate() ?? false){
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return HomePage();
-                                          },
-                                        ),
-                                      );
-                                    }
-                                  },
-                                )
+                            BlocConsumer<FarmerBloc, FarmerState>(
+                              listener: (context, state) {
+                                 if(state is FarmerDataError){
+                                  showSimpleNotification(
+                                      Text(state.message ?? 'terjadi kesalahan'),
+                                      background: CustomColors.dangerColor);
+                                }else if(state is AddFarmerSucces){
+                                   Navigator.pop(context);
+                                   showSimpleNotification(
+                                       Text("Sukses Menambah Data Petani"),
+                                       background: CustomColors.primary);
+                                 }
+                              },
+                              builder: (context, state) {
+                                if (state is FarmerLoading){
+                                  return const Padding(
+                                    padding: EdgeInsets.only(top: 48.0),
+                                    child: Center(child: CircularProgressIndicator(color: CustomColors.primary)),
+                                  );
+                                  }else {
+                                  return Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 24, bottom: 48),
+                                      child: CustomButton('Tambah',
+                                        color: CustomColors.buttonColor,
+                                        onTap: () {
+                                          if (_formKey.currentState
+                                              ?.validate() ?? false) {
+                                            _famerBloc.add(AddFarmerEvent(
+                                                token: token,
+                                                name: nameController.text,
+                                                landLocation: landLocationController.text,
+                                                landSize: landSizeController.text,
+                                                estimationProduction: estimationProductionController.text,
+                                                numberTree: numberTreeController.text
+                                            ));
+                                          }
+                                        },
+                                      )
+                                  );
+                                }
+                              },
                             ),
                           ],
                         ),

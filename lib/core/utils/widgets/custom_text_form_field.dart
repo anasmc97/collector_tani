@@ -45,7 +45,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: validator,
-      keyboardType: isNumber != null ? TextInputType.phone : null,
+      keyboardType: isNumber != null ? TextInputType.number : null,
       obscureText: isObscure,
       controller: controller,
       decoration: InputDecoration(

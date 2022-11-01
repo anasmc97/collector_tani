@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:project_tani/core/helper/helper.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
+import 'package:project_tani/feature/Farmer/presentation/farmer_bloc/farmer_bloc.dart';
 import 'package:project_tani/feature/Farmer/presentation/ui/add_farmer_page.dart';
 import 'package:project_tani/feature/Farmer/presentation/ui/farmer_page.dart';
 import 'package:project_tani/feature/comodity/presentation/ui/comodity.dart';
@@ -114,38 +115,30 @@ class _HomePageState extends State<HomePage> {
                               if(title[i] == 'Tambah Petani'){
                                 return ButtonHome(image: images[i], title: title[i],
                                   onTap:(){
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return AddFarmerPage();
-                                        },
-                                      ),
-                                    );
+                                    Helper.navigator(context, BlocProvider(
+                                      create: (context) => sl<FarmerBloc>(),
+                                      child: AddFarmerPage(token: _authModel!.token,)
+                                    ));
                                   });
                               }else if(title[i] == 'Petani'){
                                 return ButtonHome(image: images[i], title: title[i],
                                     onTap:(){
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return FarmerPage();
-                                          },
-                                        ),
-                                      );
+                                      Helper.navigator(context, BlocProvider(
+                                          create: (context) => sl<FarmerBloc>()..add(GetAllFarmerEvent(token: _authModel!.token)),
+                                          child: FarmerPage(token: _authModel!.token)
+                                      ));
                                     });
                               }else if(title[i] == 'Catat Komoditas Buah'){
                                 return ButtonHome(image: images[i], title: title[i],
                                     onTap:(){
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return SelectFarmerPage();
-                                          },
-                                        ),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) {
+                                      //       return SelectFarmerPage();
+                                      //     },
+                                      //   ),
+                                      // );
                                     });
                               }else if(title[i] == 'Komoditas Buah'){
                                 return ButtonHome(image: images[i], title: title[i],

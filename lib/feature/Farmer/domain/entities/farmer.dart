@@ -1,36 +1,36 @@
 import 'package:equatable/equatable.dart';
 
 class Farmer extends Equatable{
+  final String? id;
   final String? name;
-  final String? image;
-  final String? luasLahan;
-  final String? jumlahPohon;
-  final String? estimasiJumlahProduksi;
-  final String? koordinatLahan;
+  final String? landLocation;
+  final int? numberTree;
+  final int? estimationProduction;
+  final int? landSize;
 
-  Farmer({
+  const Farmer({
+    this.id,
     this.name,
-    this.image,
-    this.estimasiJumlahProduksi,
-    this.jumlahPohon,
-    this.koordinatLahan,
-    this.luasLahan
+    this.landLocation,
+    this.numberTree,
+    this.estimationProduction,
+    this.landSize
   });
 
   @override
   // TODO: implement props
   List<Object?> get props => [
+    id,
     name,
-    image,
-    estimasiJumlahProduksi,
-    jumlahPohon,
-    koordinatLahan,
-    luasLahan,
+    landLocation,
+    numberTree,
+    estimationProduction,
+    landSize,
   ];
 }
 
-List<Farmer> dummyListFarmer = [
-  Farmer(name: 'Imam', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: 'Narmada'),
-  Farmer(name: 'Anas', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: 'Narmada'),
-  Farmer(name: 'Wibi', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: 'Narmada'),
-];
+// List<Farmer> dummyListFarmer = [
+//   Farmer(name: 'Imam', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: 'Narmada'),
+//   Farmer(name: 'Anas', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: 'Narmada'),
+//   Farmer(name: 'Wibi', image: 'assets/Ellipse 9.png', luasLahan: '200 m2', jumlahPohon: '300', estimasiJumlahProduksi: '3000', koordinatLahan: 'Narmada'),
+// ];

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
-
+enum ViewDialogsAction { yes, no }
 class Helper{
   static navigator(BuildContext context, Widget widget) {
     Navigator.push(
@@ -8,6 +8,14 @@ class Helper{
         MaterialPageRoute(builder: (context) {
       return widget;
     }));
+  }
+
+  static navigatorPushAndReplacement(BuildContext context, Widget widget) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) {
+          return widget;
+        }));
   }
 
 
@@ -54,6 +62,42 @@ class Helper{
           borderRadius: BorderRadius.circular(10.0),
         )
     );
+  }
+
+  static Future<ViewDialogsAction> yesOrNoDialog(
+    BuildContext context,
+    String title,
+    String body,
+  ) async {
+    final action = await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: Text(title),
+          content: Text(body),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(ViewDialogsAction.no),
+              child: const Text('No'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(ViewDialogsAction.yes),
+              child: const Text(
+                'Yes',
+                style: TextStyle(
+                  color: Colors.blueAccent,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+    return (action != null) ? action : ViewDialogsAction.no;
   }
 }
 

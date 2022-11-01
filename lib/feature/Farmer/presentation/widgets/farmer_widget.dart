@@ -4,9 +4,8 @@ import 'package:project_tani/core/utils/shared_value.dart';
 class FarmerWidget extends StatelessWidget {
   final String? image;
   final String? name;
-  final String? comodity;
   final Function()? onTap;
-  const FarmerWidget({Key? key, required this.image, required this.name, required this.comodity, required this.onTap}) : super(key: key);
+  const FarmerWidget({Key? key, required this.image, required this.name, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +35,6 @@ class FarmerWidget extends StatelessWidget {
                       children: [
                         Text(name!, style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
                             fontSize: 14),
-                        ),
-                        Text(comodity!, style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color: CustomColors.colorsFontSecondary
-                        ),
                         ),
                       ],
                     ),
