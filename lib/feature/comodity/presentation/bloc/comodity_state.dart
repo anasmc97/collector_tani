@@ -14,6 +14,13 @@ class AddComoditySucces extends ComodityState {
   List<Object> get props => [];
 }
 
+class GetFruitSuccess extends ComodityState {
+  final List<Fruit?>? listFruit;
+  const GetFruitSuccess({this.listFruit});
+  @override
+  List<Object?> get props => [listFruit];
+}
+
 class ComodityLoading extends ComodityState {
   @override
   List<Object> get props => [];
@@ -24,4 +31,16 @@ class ComodityDataError extends ComodityState {
   const ComodityDataError({required this.message});
   @override
   List<Object?> get props => [message];
+}
+
+class FruitDataError extends ComodityState {
+  final String? message;
+  const FruitDataError({required this.message});
+  @override
+  List<Object?> get props => [message];
+}
+
+class FruitEmpty extends ComodityState {
+  @override
+  List<Object?> get props => [];
 }

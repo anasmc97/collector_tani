@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:project_tani/feature/Farmer/data/models/farmer_model.dart';
 import 'package:project_tani/feature/Farmer/domain/entities/farmer.dart';
 import 'package:project_tani/feature/Farmer/domain/usecase/add_farmer_usecase.dart';
 import 'package:project_tani/feature/Farmer/domain/usecase/delete_farmer_usecase.dart';
@@ -14,19 +15,19 @@ class FarmerBloc extends Bloc<FarmerEvent, FarmerState> {
   final GetAllFarmerUsecase getAllFarmer;
   final UpdateFarmerUsecase updateFarmer;
   final DeleteFarmerUsecase deleteFarmer;
-  FarmerBloc({
-    required this.addFarmer,
-    required this.getAllFarmer,
-    required this.updateFarmer,
-    required this.deleteFarmer
-  }) : super(FarmerInitial()) {
+  FarmerBloc(
+      {required this.addFarmer,
+      required this.getAllFarmer,
+      required this.updateFarmer,
+      required this.deleteFarmer})
+      : super(FarmerInitial()) {
     on<AddFarmerEvent>(_mapAddFarmerEvent);
     on<GetAllFarmerEvent>(_mapGetAllFarmerEvent);
     on<UpdateFarmerEvent>(_mapUpdateFarmerEvent);
     on<DeleteFarmerEvent>(_mapDeleteFarmerEvent);
   }
   void _mapAddFarmerEvent(
-      AddFarmerEvent event, Emitter<FarmerState> emit) async{
+      AddFarmerEvent event, Emitter<FarmerState> emit) async {
     emit(FarmerLoading());
     try {
       await addFarmer.call(ParamsAddFarmer(
@@ -43,7 +44,7 @@ class FarmerBloc extends Bloc<FarmerEvent, FarmerState> {
   }
 
   void _mapUpdateFarmerEvent(
-      UpdateFarmerEvent event, Emitter<FarmerState> emit) async{
+      UpdateFarmerEvent event, Emitter<FarmerState> emit) async {
     emit(FarmerLoading());
     try {
       await updateFarmer.call(ParamsUpdateFarmer(
@@ -61,13 +62,11 @@ class FarmerBloc extends Bloc<FarmerEvent, FarmerState> {
   }
 
   void _mapDeleteFarmerEvent(
-      DeleteFarmerEvent event, Emitter<FarmerState> emit) async{
+      DeleteFarmerEvent event, Emitter<FarmerState> emit) async {
     emit(FarmerLoading());
     try {
-      await deleteFarmer.call(ParamsDeleteFarmer(
-          id: event.id,
-          token: event.token
-      ));
+      await deleteFarmer
+          .call(ParamsDeleteFarmer(id: event.id, token: event.token));
       emit(DeleteFarmerSucces());
     } catch (e) {
       emit(FarmerDataError(message: e.toString()));
@@ -75,16 +74,16 @@ class FarmerBloc extends Bloc<FarmerEvent, FarmerState> {
   }
 
   void _mapGetAllFarmerEvent(
-      GetAllFarmerEvent event, Emitter<FarmerState> emit) async{
+      GetAllFarmerEvent event, Emitter<FarmerState> emit) async {
     emit(FarmerLoading());
     try {
-       List<Farmer?>? listFarmer = await getAllFarmer.call(ParamsGetAllFarmer(
-          token: event.token));
-       if(listFarmer == null || listFarmer.isEmpty){
-         emit(FarmerEmpty());
-       }else{
-         emit(GetAllFarmerSucces(listFarmer: listFarmer));
-       }
+      List<FarmerModel?>? listFarmer =
+          await getAllFarmer.call(ParamsGetAllFarmer(token: event.token));
+      if (listFarmer == null || listFarmer.isEmpty) {
+        emit(FarmerEmpty());
+      } else {
+        emit(GetAllFarmerSucces(listFarmer: listFarmer));
+      }
     } catch (e) {
       emit(FarmerDataError(message: e.toString()));
     }

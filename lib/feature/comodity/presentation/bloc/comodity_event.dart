@@ -15,8 +15,19 @@ class AddComodityEvent extends ComodityEvent {
   });
   @override
   List<Object?> get props => [
-    token,
-    farmerId,
-    fruitId,
-  ];
+        token,
+        farmerId,
+        fruitId,
+      ];
+}
+
+class GetFruitEvent extends ComodityEvent {
+  final String? token;
+  const GetFruitEvent({
+    this.token,
+  });
+  @override
+  List<Object?> get props => [
+        token,
+      ];
 }

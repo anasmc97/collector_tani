@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:project_tani/feature/Farmer/domain/entities/farmer.dart';
 
-class Comodity{
+class Comodity extends Equatable {
   final String? id;
   final String? farmerId;
   final String? collectorId;
@@ -15,20 +16,38 @@ class Comodity{
   final int? weightSelled;
   final Farmer? farmer;
   Comodity({
-   this.id,
-   this.farmerId,
-   this.collectorId,
-   this.fruitId,
-   this.blossomTreedate,
-   this.harvestingDate,
-   this.fruitGrade,
-   this.verified,
-   this.verifiedDate,
-   this.weight,
-   this.priceKg,
-   this.weightSelled,
-   this.farmer,
+    this.id,
+    this.farmerId,
+    this.collectorId,
+    this.fruitId,
+    this.blossomTreedate,
+    this.harvestingDate,
+    this.fruitGrade,
+    this.verified,
+    this.verifiedDate,
+    this.weight,
+    this.priceKg,
+    this.weightSelled,
+    this.farmer,
   });
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        id,
+        farmerId,
+        collectorId,
+        fruitId,
+        blossomTreedate,
+        harvestingDate,
+        fruitGrade,
+        verified,
+        verifiedDate,
+        weight,
+        priceKg,
+        weightSelled,
+        farmer
+      ];
 }
 
 // List<Comodity> dummyListComodity = [
