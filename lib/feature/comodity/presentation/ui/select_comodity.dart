@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/core/utils/widgets/custom_button.dart';
+import 'package:project_tani/feature/Farmer/domain/entities/farmer.dart';
 import 'package:project_tani/feature/comodity/presentation/ui/comodity.dart';
 import 'package:project_tani/feature/comodity/presentation/widgets/selected_comodity_box.dart';
 
-class SelectComodityPage extends StatelessWidget {
-  SelectComodityPage({Key? key}) : super(key: key);
+class SelectComodityPage extends StatefulWidget {
+  String? token;
+  Farmer? farmer;
+  SelectComodityPage({Key? key, this.token, this.farmer}) : super(key: key);
+
+  @override
+  State<SelectComodityPage> createState() => _SelectComodityPageState();
+}
+
+class _SelectComodityPageState extends State<SelectComodityPage> {
   final List<String> _listComodity = ['Mangga', 'Rambutan', 'Durian', 'Manggis'];
+
+  bool selected = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,8 +88,14 @@ class SelectComodityPage extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.only(top: 16.0),
-                                  child: SelectedComodityBox(comodityName: _listComodity[index],
-                                  ),
+                                  child: GestureDetector(
+                                      onTap: (){
+                                        setState(() {
+                                          selected = _listComodity.contains(_listComodity[index]);
+                                        });
+
+                                      },
+                                      child: SelectedComodityBox(comodityName: _listComodity[index], isSelected: selected,)),
                                 );
                               }
                             ),
@@ -86,14 +104,14 @@ class SelectComodityPage extends StatelessWidget {
                               padding: const EdgeInsets.only(top: 24, bottom: 40),
                               child: CustomButton('Tambah', color: CustomColors.buttonColor,
                                 onTap: (){
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return ComodityPage();
-                                      },
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) {
+                                  //       return ComodityPage();
+                                  //     },
+                                  //   ),
+                                  // );
                                 },
                               )
                           ),

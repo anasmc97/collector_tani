@@ -219,10 +219,7 @@ class _DetailFarmerPageState extends State<DetailFarmerPage> {
                                   Text("Sukses Merubah Data Petani"),
                                   background: CustomColors.primary);
                             }else if(state is DeleteFarmerSucces){
-                              Helper.navigatorPushAndReplacement(context, BlocProvider(
-                                  create: (context) => sl<FarmerBloc>()..add(GetAllFarmerEvent(token: widget.token)),
-                                  child: FarmerPage(token: widget.token)
-                              ));
+                              Navigator.pop(context);
                               showSimpleNotification(
                                   Text("Sukses Merubah mengapus Petani"),
                                   background: CustomColors.primary);

@@ -7,6 +7,12 @@ import 'package:project_tani/feature/Farmer/domain/usecase/delete_farmer_usecase
 import 'package:project_tani/feature/Farmer/domain/usecase/get_farmer_usecase.dart';
 import 'package:project_tani/feature/Farmer/domain/usecase/update_farmer_usecase.dart';
 import 'package:project_tani/feature/Farmer/presentation/farmer_bloc/farmer_bloc.dart';
+import 'package:project_tani/feature/comodity/data/datasources/comodity_remote_datasource.dart';
+import 'package:project_tani/feature/comodity/data/repositories/comodity_repository_impl.dart';
+import 'package:project_tani/feature/comodity/domain/entity/comodity.dart';
+import 'package:project_tani/feature/comodity/domain/repositories/comodity_repositories.dart';
+import 'package:project_tani/feature/comodity/domain/usecase/add_comodity_usecase.dart';
+import 'package:project_tani/feature/comodity/presentation/bloc/comodity_bloc.dart';
 import 'package:project_tani/feature/login/data/datasources/auth_remote_datasource.dart';
 import 'package:project_tani/feature/login/data/repositories/auth_repository_impl.dart';
 import 'package:project_tani/feature/login/domain/repositories/auth_repositories.dart';
@@ -35,6 +41,10 @@ Future<void> init() async {
       deleteFarmer: sl()
   ));
 
+  sl.registerFactory(() => ComodityBloc(
+      addComodity: sl(),
+  ));
+
   // Use cases
   sl.registerLazySingleton(() => LoginUsecase(sl()));
   sl.registerLazySingleton(() => SignUpUsecase(sl()));
@@ -44,6 +54,9 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetAllFarmerUsecase(sl()));
   sl.registerLazySingleton(() => UpdateFarmerUsecase(sl()));
   sl.registerLazySingleton(() => DeleteFarmerUsecase(sl()));
+
+  sl.registerLazySingleton(() => AddComodityUsecase(sl()));
+
   // Repository
   sl.registerLazySingleton<AuthRepository>(
         () => AuthRepositoryImpl(
@@ -53,6 +66,12 @@ Future<void> init() async {
 
   sl.registerLazySingleton<FarmerRepository>(
         () => FarmerRepositoryImpl(
+      remoteDataSource: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<ComodityRepository>(
+        () => ComodityRepositoryImpl(
       remoteDataSource: sl(),
     ),
   );
@@ -67,6 +86,11 @@ Future<void> init() async {
   sl.registerLazySingleton<FarmerRemoteDataSource>(
         () => FarmerRemoteDataSourceImpl(),
   );
+
+  sl.registerLazySingleton<ComodityRemoteDataSource>(
+        () => ComodityRemoteDataSourceImpl(),
+  );
+
   //! External
   // final sharedPreferences = await SharedPreferences.getInstance();
   // sl.registerLazySingleton(() => sharedPreferences);

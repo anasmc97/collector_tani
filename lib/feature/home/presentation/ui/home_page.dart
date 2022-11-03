@@ -29,6 +29,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   AuthBloc? _authBloc;
+  FarmerBloc? _farmerBloc;
   AuthModel? _authModel;
   List<String> images = ["assets/Icon.png", "assets/catat_komoditas_buah.png",
      "assets/buat_transaksi.png", "assets/petani.png",
@@ -41,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _authBloc = BlocProvider.of<AuthBloc>(context);
+    _farmerBloc = BlocProvider.of<FarmerBloc>(context);
     _authModel = widget.authModel;
     super.initState();
   }
@@ -131,62 +133,63 @@ class _HomePageState extends State<HomePage> {
                               }else if(title[i] == 'Catat Komoditas Buah'){
                                 return ButtonHome(image: images[i], title: title[i],
                                     onTap:(){
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) {
-                                      //       return SelectFarmerPage();
-                                      //     },
-                                      //   ),
-                                      // );
+                                    _farmerBloc!.add(GetAllFarmerEvent(token: _authModel!.token));
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return SelectFarmerPage();
+                                          },
+                                        ),
+                                      );
                                     });
                               }else if(title[i] == 'Komoditas Buah'){
                                 return ButtonHome(image: images[i], title: title[i],
                                     onTap:(){
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return ComodityPage();
-                                          },
-                                        ),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) {
+                                      //       return ComodityPage();
+                                      //     },
+                                      //   ),
+                                      // );
                                     });
                               }else if(title[i] == 'Transaksi Petani'){
                                 return ButtonHome(image: images[i], title: title[i],
                                     onTap:(){
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return TransactionWithFarmerPage();
-                                          },
-                                        ),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) {
+                                      //       return TransactionWithFarmerPage();
+                                      //     },
+                                      //   ),
+                                      // );
                                     });
                               }else if(title[i] == 'Transaksi Pelanggan'){
                                 return ButtonHome(image: images[i], title: title[i],
                                     onTap:(){
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return TransactionWithCustomerPage();
-                                          },
-                                        ),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) {
+                                      //       return TransactionWithCustomerPage();
+                                      //     },
+                                      //   ),
+                                      // );
                                     });
                               }else if(title[i] == 'Buat Transaksi'){
                                 return ButtonHome(image: images[i], title: title[i],
                                     onTap:(){
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return SelectTransaction();
-                                          },
-                                        ),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) {
+                                      //       return SelectTransaction();
+                                      //     },
+                                      //   ),
+                                      // );
                                     });
                               }
 

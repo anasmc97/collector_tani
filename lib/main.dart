@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_flipperkit/flutter_flipperkit.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:project_tani/feature/Farmer/presentation/farmer_bloc/farmer_bloc.dart';
+import 'package:project_tani/feature/comodity/presentation/bloc/comodity_bloc.dart';
 import 'package:project_tani/feature/login/presentation/bloc/auth_bloc.dart';
 import 'package:project_tani/feature/login/presentation/ui/login_page.dart';
 import 'package:project_tani/injection_container.dart';
@@ -24,13 +26,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OverlaySupport.global(
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: CustomTheme.lightTheme,
-        home: BlocProvider(
-          create: (context) => sl<AuthBloc>()..add(AutoLoginEvent()),
-          child: LoginPage(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => sl<AuthBloc>()..add(AutoLoginEvent())),
+        BlocProvider(create: (_) => sl<FarmerBloc>()),
+        BlocProvider(create: (_) => sl<ComodityBloc>()),
+      ],
+      child: OverlaySupport.global(
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: CustomTheme.lightTheme,
+          home: LoginPage(),
         ),
       ),
     );

@@ -10,7 +10,6 @@ import 'package:project_tani/injection_container.dart';
 class FarmerPage extends StatelessWidget {
   String? token;
   FarmerPage({Key? key, this.token}) : super(key: key);
-  final List<String> listComodity = ['Mangga, Durian', 'Rambutan, Manggis', 'Durian, Manggis'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
