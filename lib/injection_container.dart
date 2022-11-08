@@ -13,6 +13,9 @@ import 'package:project_tani/feature/comodity/domain/entity/comodity.dart';
 import 'package:project_tani/feature/comodity/domain/repositories/comodity_repositories.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/add_comodity_usecase.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/get_fruits_usecase.dart';
+import 'package:project_tani/feature/comodity/domain/usecase/get_list_comodity.dart';
+import 'package:project_tani/feature/comodity/domain/usecase/update_comodity.dart';
+import 'package:project_tani/feature/comodity/domain/usecase/verify_comodity.dart';
 import 'package:project_tani/feature/comodity/presentation/bloc/comodity_bloc.dart';
 import 'package:project_tani/feature/login/data/datasources/auth_remote_datasource.dart';
 import 'package:project_tani/feature/login/data/repositories/auth_repository_impl.dart';
@@ -28,19 +31,31 @@ Future<void> init() async {
   //! Features - Login
   // Bloc
   sl.registerFactory(
-    () => AuthBloc(login: sl(), signUp: sl(), logout: sl()),
+    () => AuthBloc(
+      login: sl(),
+      signUp: sl(),
+      logout: sl(),
+    ),
   );
 
-  sl.registerFactory(() => FarmerBloc(
+  sl.registerFactory(
+    () => FarmerBloc(
       addFarmer: sl(),
       getAllFarmer: sl(),
       updateFarmer: sl(),
-      deleteFarmer: sl()));
+      deleteFarmer: sl(),
+    ),
+  );
 
-  sl.registerFactory(() => ComodityBloc(
-        addComodity: sl(),
-        getFruits: sl(),
-      ));
+  sl.registerFactory(
+    () => ComodityBloc(
+      addComodity: sl(),
+      getFruits: sl(),
+      getListComodity: sl(),
+      updateComodity: sl(),
+      verifyComodity: sl(),
+    ),
+  );
 
   // Use cases
   sl.registerLazySingleton(() => LoginUsecase(sl()));
@@ -54,7 +69,9 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => AddComodityUsecase(sl()));
   sl.registerLazySingleton(() => GetFruitUsecase(sl()));
-
+  sl.registerLazySingleton(() => GetListComodityUsecase(sl()));
+  sl.registerLazySingleton(() => UpdateComodityUsecase(sl()));
+  sl.registerLazySingleton(() => VerifyComodityUsecase(sl()));
   // Repository
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(

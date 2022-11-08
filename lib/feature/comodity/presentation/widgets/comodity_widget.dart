@@ -1,25 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
+import 'package:project_tani/feature/comodity/data/models/comodity_model.dart';
+import 'package:project_tani/feature/comodity/domain/entity/fruit.dart';
 
 class ComodityWidget extends StatelessWidget {
   final String? image;
-  final String? name;
-  final String? comodity;
-  final String? date;
-  final String? month;
-  final String? year;
-  final bool isValid;
+  final ComodityModel? comodity;
   final Function()? onTap;
-  const ComodityWidget({Key? key,
-    required this.image,
-    required this.name,
-    required this.comodity,
-    this.date,
-    this.month,
-    this.year,
-    this.isValid = false,
-    required this.onTap}) : super(key: key);
+  const ComodityWidget(
+      {Key? key,
+      required this.image,
+      required this.comodity,
+      required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +27,10 @@ class ComodityWidget extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: const BorderRadius.all(Radius.circular(10),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
               ),
-              border: Border.all(
-                  color: CustomColors.borderField
-              ),
+              border: Border.all(color: CustomColors.borderField),
             ),
             child: Column(
               children: [
@@ -51,9 +44,10 @@ class ComodityWidget extends StatelessWidget {
                           Container(
                             width: 56,
                             height: 56,
-                            decoration:  BoxDecoration(
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              image: DecorationImage(image: AssetImage(image!),
+                              image: DecorationImage(
+                                image: AssetImage(image!),
                               ),
                             ),
                           ),
@@ -63,20 +57,36 @@ class ComodityWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(comodity!, style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
-                                    fontSize: 14),
+                                Text(
+                                  comodity!.fruit!.name!,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14),
                                 ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const Icon(Icons.person_outline, color: CustomColors.colorsFontSecondary, size: 16,),
+                                    const Icon(
+                                      Icons.person_outline,
+                                      color: CustomColors.colorsFontSecondary,
+                                      size: 16,
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 4.0),
-                                      child: Text(name!, style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
-                                          fontSize: 14,
-                                          color: CustomColors.colorsFontSecondary
-                                      ),
+                                      child: Text(
+                                        comodity!.farmer!.name!,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                                color: CustomColors
+                                                    .colorsFontSecondary),
                                       ),
                                     ),
                                   ],
@@ -85,13 +95,23 @@ class ComodityWidget extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const Icon(Icons.calendar_today_outlined, color: CustomColors.colorsFontSecondary, size: 16,),
+                                    const Icon(
+                                      Icons.calendar_today_outlined,
+                                      color: CustomColors.colorsFontSecondary,
+                                      size: 16,
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 4.0),
-                                      child: Text('$date - $month - $year', style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w500,
-                                          fontSize: 14,
-                                          color: CustomColors.colorsFontSecondary
-                                      ),
+                                      child: Text(
+                                        comodity?.harvestingDate ?? '-',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                                color: CustomColors
+                                                    .colorsFontSecondary),
                                       ),
                                     ),
                                   ],
@@ -103,11 +123,17 @@ class ComodityWidget extends StatelessWidget {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        child: isValid ? Text('Valid',
-                          style: Theme.of(context).textTheme.headline2!
-                              .copyWith(fontWeight: FontWeight.w600,
-                              color: CustomColors.colorValidText),
-                        ) : null,
+                        child: comodity!.verified == 1
+                            ? Text(
+                                'Valid',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline2!
+                                    .copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: CustomColors.colorValidText),
+                              )
+                            : null,
                       )
                     ],
                   ),

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 
 class DropDownGrade extends StatefulWidget {
-  const DropDownGrade({Key? key}) : super(key: key);
+  String? dropDownValue;
+  DropDownGrade({Key? key, required this.dropDownValue}) : super(key: key);
 
   @override
   State<DropDownGrade> createState() => _DropDownGradeState();
 }
 
 class _DropDownGradeState extends State<DropDownGrade> {
-  String dropDownValue = 'A';
-  final items =  ['A','B','C','D'];
+  final items = ['A', 'B', 'C', 'D'];
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -19,12 +19,9 @@ class _DropDownGradeState extends State<DropDownGrade> {
       child: Container(
         decoration: const BoxDecoration(
           border: Border.fromBorderSide(
-              BorderSide(
-                color: CustomColors.borderField,
-                width: 2
-              )
-        ),
-          borderRadius: BorderRadius.all(Radius.circular(10.0),
+              BorderSide(color: CustomColors.borderField, width: 2)),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
           ),
         ),
         child: DropdownButtonHideUnderline(
@@ -33,21 +30,19 @@ class _DropDownGradeState extends State<DropDownGrade> {
             child: DropdownButton(
               isExpanded: true,
               elevation: 0,
-              value: dropDownValue,
-              icon: const Icon(Icons.keyboard_arrow_down, color: CustomColors.primary,),
-              items:items.map((String items) {
-                return DropdownMenuItem(
-                    value: items,
-                    child: Text(items)
-                );
-              }
-              ).toList(),
-              onChanged: (String? newValue){
+              value: widget.dropDownValue,
+              icon: const Icon(
+                Icons.keyboard_arrow_down,
+                color: CustomColors.primary,
+              ),
+              items: items.map((String items) {
+                return DropdownMenuItem(value: items, child: Text(items));
+              }).toList(),
+              onChanged: (String? newValue) {
                 setState(() {
-                  dropDownValue = newValue!;
+                  widget.dropDownValue = newValue!;
                 });
               },
-
             ),
           ),
         ),

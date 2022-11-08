@@ -118,7 +118,7 @@ class _SelectComodityPageState extends State<SelectComodityPage> {
                               builder: (context, state) {
                                 if (state is GetFruitSuccess) {
                                   return ListView.builder(
-                                      itemCount: state.listFruit?.length ?? 0,
+                                      itemCount: state.listFruit.length ?? 0,
                                       itemBuilder: (context, index) {
                                         return Padding(
                                           padding:
@@ -127,11 +127,11 @@ class _SelectComodityPageState extends State<SelectComodityPage> {
                                             onTap: () {
                                               selectedFruit!.clear();
                                               selectedFruit!
-                                                  .add(state.listFruit![index]);
+                                                  .add(state.listFruit[index]);
                                               setState(() {});
                                             },
                                             child: SelectedComodityBox(
-                                              fruit: state.listFruit![index],
+                                              fruit: state.listFruit[index],
                                               selectedFruit:
                                                   selectedFruit!.isNotEmpty
                                                       ? selectedFruit!.first
@@ -153,10 +153,15 @@ class _SelectComodityPageState extends State<SelectComodityPage> {
                                     Text(state.message ?? 'terjadi kesalahan'),
                                     background: CustomColors.dangerColor);
                               } else if (state is AddComoditySucces) {
-                                Navigator.pop(context);
                                 showSimpleNotification(
                                     Text("Sukses Menambah Data Petani"),
                                     background: CustomColors.primary);
+                                Helper.navigatorPushAndReplacement(
+                                  context,
+                                  ComodityPage(
+                                    token: widget.token,
+                                  ),
+                                );
                               }
                             },
                             builder: (context, state) {
@@ -182,8 +187,7 @@ class _SelectComodityPageState extends State<SelectComodityPage> {
                                             farmerId: widget.farmer!.id,
                                             fruitId: selectedFruit?.first?.id),
                                       );
-                                      Helper.navigatorPushAndReplacement(
-                                          context, ComodityPage());
+
                                       // Navigator.push(
                                       //   context,
                                       //   MaterialPageRoute(

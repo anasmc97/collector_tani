@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:project_tani/feature/Farmer/domain/entities/farmer.dart';
+import 'package:project_tani/feature/comodity/domain/entity/fruit.dart';
 
 class Comodity extends Equatable {
   final String? id;
@@ -15,21 +16,22 @@ class Comodity extends Equatable {
   final int? priceKg;
   final int? weightSelled;
   final Farmer? farmer;
-  Comodity({
-    this.id,
-    this.farmerId,
-    this.collectorId,
-    this.fruitId,
-    this.blossomTreedate,
-    this.harvestingDate,
-    this.fruitGrade,
-    this.verified,
-    this.verifiedDate,
-    this.weight,
-    this.priceKg,
-    this.weightSelled,
-    this.farmer,
-  });
+  final Fruit? fruit;
+  Comodity(
+      {this.id,
+      this.farmerId,
+      this.collectorId,
+      this.fruitId,
+      this.blossomTreedate,
+      this.harvestingDate,
+      this.fruitGrade,
+      this.verified,
+      this.verifiedDate,
+      this.weight,
+      this.priceKg,
+      this.weightSelled,
+      this.farmer,
+      this.fruit});
 
   @override
   // TODO: implement props
@@ -46,7 +48,8 @@ class Comodity extends Equatable {
         weight,
         priceKg,
         weightSelled,
-        farmer
+        farmer,
+        fruit
       ];
 }
 
