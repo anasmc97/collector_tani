@@ -12,6 +12,7 @@ import 'package:project_tani/feature/comodity/data/repositories/comodity_reposit
 import 'package:project_tani/feature/comodity/domain/entity/comodity.dart';
 import 'package:project_tani/feature/comodity/domain/repositories/comodity_repositories.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/add_comodity_usecase.dart';
+import 'package:project_tani/feature/comodity/domain/usecase/delete_comodity_usecase.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/get_fruits_usecase.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/get_list_comodity.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/update_comodity.dart';
@@ -49,12 +50,12 @@ Future<void> init() async {
 
   sl.registerFactory(
     () => ComodityBloc(
-      addComodity: sl(),
-      getFruits: sl(),
-      getListComodity: sl(),
-      updateComodity: sl(),
-      verifyComodity: sl(),
-    ),
+        addComodity: sl(),
+        getFruits: sl(),
+        getListComodity: sl(),
+        updateComodity: sl(),
+        verifyComodity: sl(),
+        deleteComodity: sl()),
   );
 
   // Use cases
@@ -72,6 +73,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetListComodityUsecase(sl()));
   sl.registerLazySingleton(() => UpdateComodityUsecase(sl()));
   sl.registerLazySingleton(() => VerifyComodityUsecase(sl()));
+  sl.registerLazySingleton(() => DeleteComodityUsecase(sl()));
   // Repository
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(

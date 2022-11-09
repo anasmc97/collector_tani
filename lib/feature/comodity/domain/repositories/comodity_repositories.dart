@@ -13,4 +13,5 @@ abstract class ComodityRepository {
       String? fruitGrade,
       int? weight);
   Future<void> verifyComodity(String? token, String? id);
+  Future<void> deleteComodity(String? token, String? id);
 }

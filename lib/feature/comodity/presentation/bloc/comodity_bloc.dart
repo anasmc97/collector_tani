@@ -6,6 +6,7 @@ import 'package:project_tani/feature/comodity/data/models/comodity_model.dart';
 import 'package:project_tani/feature/comodity/data/models/fruit_model.dart';
 import 'package:project_tani/feature/comodity/domain/entity/fruit.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/add_comodity_usecase.dart';
+import 'package:project_tani/feature/comodity/domain/usecase/delete_comodity_usecase.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/get_fruits_usecase.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/get_list_comodity.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/update_comodity.dart';
@@ -20,18 +21,21 @@ class ComodityBloc extends Bloc<ComodityEvent, ComodityState> {
   final GetListComodityUsecase getListComodity;
   final UpdateComodityUsecase updateComodity;
   final VerifyComodityUsecase verifyComodity;
+  final DeleteComodityUsecase deleteComodity;
   ComodityBloc(
       {required this.addComodity,
       required this.getFruits,
       required this.getListComodity,
       required this.updateComodity,
-      required this.verifyComodity})
+      required this.verifyComodity,
+      required this.deleteComodity})
       : super(ComodityInitial()) {
     on<AddComodityEvent>(_mapAddComodityEvent);
     on<GetFruitEvent>(_mapGetFruitEvent);
     on<GetListComodityEvent>(_mapGetListComodityEvent);
     on<UpdateComodityEvent>(_mapUpdateComodityEvent);
     on<VerifyComodityEvent>(_mapVerifyComodityEvent);
+    on<DeleteComodityEvent>(_mapDeleteComodityEvent);
   }
 
   void _mapAddComodityEvent(
@@ -79,6 +83,22 @@ class ComodityBloc extends Bloc<ComodityEvent, ComodityState> {
         ),
       );
       emit(VerifyComoditySucces());
+    } catch (e) {
+      emit(ComodityDataError(message: e.toString()));
+    }
+  }
+
+  void _mapDeleteComodityEvent(
+      DeleteComodityEvent event, Emitter<ComodityState> emit) async {
+    emit(ComodityLoading());
+    try {
+      await deleteComodity.call(
+        ParamsDeleteComodity(
+          token: event.token,
+          id: event.id,
+        ),
+      );
+      emit(DeleteComoditySucces());
     } catch (e) {
       emit(ComodityDataError(message: e.toString()));
     }

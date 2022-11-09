@@ -16,6 +16,7 @@ abstract class ComodityRemoteDataSource {
       String? fruitGrade,
       int? weight);
   Future<void> verifyComodity(String? token, String? id);
+  Future<void> deleteComodity(String? token, String? id);
 }
 
 class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
@@ -124,6 +125,22 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
     final dio = Dio();
     try {
       await dio.put(api,
+          options: Options(headers: {"Authorization": "Bearer $token"}));
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      return Error.checkException(e);
+    }
+  }
+
+  @override
+  Future<void> deleteComodity(String? token, String? id) async {
+    final api = 'http://192.168.1.9:8000/api/collector/comodity/$id';
+
+    final dio = Dio();
+    try {
+      await dio.delete(api,
           options: Options(headers: {"Authorization": "Bearer $token"}));
     } catch (e) {
       if (kDebugMode) {

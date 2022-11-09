@@ -48,6 +48,14 @@ class VerifyComodityEvent extends ComodityEvent {
   List<Object?> get props => [token, id];
 }
 
+class DeleteComodityEvent extends ComodityEvent {
+  final String? token;
+  final String? id;
+  const DeleteComodityEvent({this.token, this.id});
+  @override
+  List<Object?> get props => [token, id];
+}
+
 class GetFruitEvent extends ComodityEvent {
   final String? token;
   const GetFruitEvent({

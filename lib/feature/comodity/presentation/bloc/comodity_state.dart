@@ -19,6 +19,11 @@ class UpdateComoditySucces extends ComodityState {
   List<Object> get props => [];
 }
 
+class DeleteComoditySucces extends ComodityState {
+  @override
+  List<Object> get props => [];
+}
+
 class VerifyComoditySucces extends ComodityState {
   @override
   List<Object> get props => [];

@@ -38,4 +38,9 @@ class ComodityRepositoryImpl implements ComodityRepository {
   Future<void> verifyComodity(String? token, String? id) {
     return remoteDataSource.verifyComodity(token, id);
   }
+
+  @override
+  Future<void> deleteComodity(String? token, String? id) {
+    return remoteDataSource.deleteComodity(token, id);
+  }
 }

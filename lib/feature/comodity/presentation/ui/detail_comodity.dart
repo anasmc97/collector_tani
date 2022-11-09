@@ -265,9 +265,19 @@ class _DetailComodityState extends State<DetailComodity> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 24.0),
-                            child: MiniButton(text: 'Hapus'),
+                          GestureDetector(
+                            onTap: () {
+                              BlocProvider.of<ComodityBloc>(context).add(
+                                DeleteComodityEvent(
+                                  token: widget.token,
+                                  id: widget.comodity!.id,
+                                ),
+                              );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 24.0),
+                              child: MiniButton(text: 'Hapus'),
+                            ),
                           ),
                           BlocConsumer<ComodityBloc, ComodityState>(
                             listener: (context, state) {
@@ -275,10 +285,30 @@ class _DetailComodityState extends State<DetailComodity> {
                                 showSimpleNotification(
                                     Text(state.message ?? 'terjadi kesalahan'),
                                     background: CustomColors.dangerColor);
-                              } else if (state is UpdateComoditySucces ||
-                                  state is VerifyComoditySucces) {
+                              } else if (state is UpdateComoditySucces) {
                                 showSimpleNotification(
                                     const Text("Sukses Update Data Komoditas"),
+                                    background: CustomColors.primary);
+                                Helper.navigatorPushAndReplacement(
+                                  context,
+                                  ComodityPage(
+                                    token: widget.token,
+                                  ),
+                                );
+                              } else if (state is VerifyComoditySucces) {
+                                showSimpleNotification(
+                                    const Text(
+                                        "Sukses Validasi Data Komoditas"),
+                                    background: CustomColors.primary);
+                                Helper.navigatorPushAndReplacement(
+                                  context,
+                                  ComodityPage(
+                                    token: widget.token,
+                                  ),
+                                );
+                              } else if (state is DeleteComoditySucces) {
+                                showSimpleNotification(
+                                    const Text("Sukses Hapus Data Komoditas"),
                                     background: CustomColors.primary);
                                 Helper.navigatorPushAndReplacement(
                                   context,
