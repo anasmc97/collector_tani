@@ -7,6 +7,7 @@ import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/Farmer/presentation/farmer_bloc/farmer_bloc.dart';
 import 'package:project_tani/feature/Farmer/presentation/ui/add_farmer_page.dart';
 import 'package:project_tani/feature/Farmer/presentation/ui/farmer_page.dart';
+import 'package:project_tani/feature/comodity/presentation/bloc/comodity_bloc.dart';
 import 'package:project_tani/feature/comodity/presentation/ui/comodity.dart';
 import 'package:project_tani/feature/comodity/presentation/ui/select_farmer.dart';
 import 'package:project_tani/feature/home/presentation/widgets/button_home.dart';
@@ -195,14 +196,19 @@ class _HomePageState extends State<HomePage> {
                               image: images[i],
                               title: title[i],
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) {
-                                //       return TransactionWithFarmerPage();
-                                //     },
-                                //   ),
-                                // );
+                                BlocProvider.of<ComodityBloc>(context).add(
+                                  GetListComodityEvent(
+                                    token: widget.authModel!.token,
+                                  ),
+                                );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return TransactionWithFarmerPage();
+                                    },
+                                  ),
+                                );
                               });
                         } else if (title[i] == 'Transaksi Pelanggan') {
                           return ButtonHome(
