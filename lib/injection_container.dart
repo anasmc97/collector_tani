@@ -15,6 +15,7 @@ import 'package:project_tani/feature/comodity/domain/usecase/add_comodity_usecas
 import 'package:project_tani/feature/comodity/domain/usecase/delete_comodity_usecase.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/get_fruits_usecase.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/get_list_comodity.dart';
+import 'package:project_tani/feature/comodity/domain/usecase/get_list_comodity_verified_usecase.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/update_comodity.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/verify_comodity.dart';
 import 'package:project_tani/feature/comodity/presentation/bloc/comodity_bloc.dart';
@@ -67,6 +68,7 @@ Future<void> init() async {
         addComodity: sl(),
         getFruits: sl(),
         getListComodity: sl(),
+        getListComodityVerified: sl(),
         updateComodity: sl(),
         verifyComodity: sl(),
         deleteComodity: sl()),
@@ -101,6 +103,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddComodityUsecase(sl()));
   sl.registerLazySingleton(() => GetFruitUsecase(sl()));
   sl.registerLazySingleton(() => GetListComodityUsecase(sl()));
+  sl.registerLazySingleton(() => GetListComodityVerifiedUsecase(sl()));
   sl.registerLazySingleton(() => UpdateComodityUsecase(sl()));
   sl.registerLazySingleton(() => VerifyComodityUsecase(sl()));
   sl.registerLazySingleton(() => DeleteComodityUsecase(sl()));

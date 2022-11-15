@@ -8,8 +8,25 @@ import 'package:project_tani/feature/transaction/presentation/ui/transaction_wit
 import 'package:project_tani/feature/transaction/presentation/widget/transaction_farmer_widget.dart';
 import 'package:project_tani/feature/transaction/presentation/widget/transaction_with_farmer_widget.dart';
 
-class TransactionWithFarmerPage extends StatelessWidget {
-  const TransactionWithFarmerPage({Key? key}) : super(key: key);
+class TransactionWithFarmerPage extends StatefulWidget {
+  final String? token;
+  const TransactionWithFarmerPage({Key? key, this.token}) : super(key: key);
+
+  @override
+  State<TransactionWithFarmerPage> createState() =>
+      _TransactionWithFarmerPageState();
+}
+
+class _TransactionWithFarmerPageState extends State<TransactionWithFarmerPage> {
+  @override
+  void initState() {
+    BlocProvider.of<ComodityBloc>(context).add(
+      GetListComodityVerifiedEvent(
+        token: widget.token,
+      ),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +67,13 @@ class TransactionWithFarmerPage extends StatelessWidget {
                             child: CircularProgressIndicator(
                                 color: CustomColors.primary)),
                       );
+                    } else if (state is ComodityEmpty) {
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 48.0),
+                        child: Center(
+                            child: Text(
+                                'daftar komidatas yang sudah diverifikasi kosong')),
+                      );
                     } else if (state is GetListComoditySuccess) {
                       return Padding(
                         padding: const EdgeInsets.only(top: 40.0),
@@ -57,22 +81,26 @@ class TransactionWithFarmerPage extends StatelessWidget {
                           height: MediaQuery.of(context).size.height,
                           width: MediaQuery.of(context).size.width,
                           child: ListView.builder(
-                              itemCount: state.listComodity.length,
-                              itemBuilder: (context, index) =>
-                                  TransactionWithFarmerWidget(
-                                    image: 'assets/fruit.png',
-                                    comodityModel: state.listComodity[index],
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return TransactionWithFarmerDetail();
-                                          },
-                                        ),
+                            itemCount: state.listComodity.length,
+                            itemBuilder: (context, index) =>
+                                TransactionWithFarmerWidget(
+                              image: 'assets/fruit.png',
+                              comodityModel: state.listComodity[index],
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return TransactionFarmerDetail(
+                                        token: widget.token,
+                                        comodity: state.listComodity[index],
                                       );
                                     },
-                                  )),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ),
                       );
                     } else {

@@ -9,6 +9,7 @@ import 'package:project_tani/feature/comodity/domain/usecase/add_comodity_usecas
 import 'package:project_tani/feature/comodity/domain/usecase/delete_comodity_usecase.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/get_fruits_usecase.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/get_list_comodity.dart';
+import 'package:project_tani/feature/comodity/domain/usecase/get_list_comodity_verified_usecase.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/update_comodity.dart';
 import 'package:project_tani/feature/comodity/domain/usecase/verify_comodity.dart';
 
@@ -19,6 +20,7 @@ class ComodityBloc extends Bloc<ComodityEvent, ComodityState> {
   final AddComodityUsecase addComodity;
   final GetFruitUsecase getFruits;
   final GetListComodityUsecase getListComodity;
+  final GetListComodityVerifiedUsecase getListComodityVerified;
   final UpdateComodityUsecase updateComodity;
   final VerifyComodityUsecase verifyComodity;
   final DeleteComodityUsecase deleteComodity;
@@ -26,6 +28,7 @@ class ComodityBloc extends Bloc<ComodityEvent, ComodityState> {
       {required this.addComodity,
       required this.getFruits,
       required this.getListComodity,
+      required this.getListComodityVerified,
       required this.updateComodity,
       required this.verifyComodity,
       required this.deleteComodity})
@@ -33,6 +36,7 @@ class ComodityBloc extends Bloc<ComodityEvent, ComodityState> {
     on<AddComodityEvent>(_mapAddComodityEvent);
     on<GetFruitEvent>(_mapGetFruitEvent);
     on<GetListComodityEvent>(_mapGetListComodityEvent);
+    on<GetListComodityVerifiedEvent>(_mapGetListComodityVerifiedEvent);
     on<UpdateComodityEvent>(_mapUpdateComodityEvent);
     on<VerifyComodityEvent>(_mapVerifyComodityEvent);
     on<DeleteComodityEvent>(_mapDeleteComodityEvent);
@@ -126,6 +130,22 @@ class ComodityBloc extends Bloc<ComodityEvent, ComodityState> {
     try {
       List<ComodityModel?> listComodity =
           await getListComodity.call(ParamsGetListComodity(token: event.token));
+      if (listComodity.isEmpty) {
+        emit(ComodityEmpty());
+      } else {
+        emit(GetListComoditySuccess(listComodity: listComodity));
+      }
+    } catch (e) {
+      emit(FruitDataError(message: e.toString()));
+    }
+  }
+
+  void _mapGetListComodityVerifiedEvent(
+      GetListComodityVerifiedEvent event, Emitter<ComodityState> emit) async {
+    emit(ComodityLoading());
+    try {
+      List<ComodityModel?> listComodity = await getListComodityVerified
+          .call(ParamsGetListComodityVerified(token: event.token));
       if (listComodity.isEmpty) {
         emit(ComodityEmpty());
       } else {

@@ -8,6 +8,7 @@ abstract class ComodityRemoteDataSource {
   Future<void> addComodity(String? token, String? farmerId, String? fruitId);
   Future<List<FruitModel?>> getFruits(String? token);
   Future<List<ComodityModel?>> getListComodity(String? token);
+  Future<List<ComodityModel?>> getListComodityVerified(String? token);
   Future<void> updateComodity(
       String? token,
       String? id,
@@ -142,6 +143,31 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
     try {
       await dio.delete(api,
           options: Options(headers: {"Authorization": "Bearer $token"}));
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      return Error.checkException(e);
+    }
+  }
+
+  @override
+  Future<List<ComodityModel?>> getListComodityVerified(String? token) async {
+    const api = 'http://192.168.1.9:8000/api/collector/comodity/list/verified/';
+
+    final dio = Dio();
+    Response response;
+    try {
+      response = await dio.get(api,
+          options: Options(headers: {"Authorization": "Bearer $token"}));
+      if (response.statusCode == 200) {
+        final body = response.data['data']['fruit_comodity'];
+        List<ComodityModel?>? listComodityModel =
+            (body as Iterable).map((e) => ComodityModel.fromJson(e)).toList();
+        return listComodityModel;
+      } else {
+        return [];
+      }
     } catch (e) {
       if (kDebugMode) {
         print(e);

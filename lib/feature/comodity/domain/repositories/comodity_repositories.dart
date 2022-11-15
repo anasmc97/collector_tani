@@ -5,6 +5,7 @@ abstract class ComodityRepository {
   Future<void> addComodity(String? token, String? farmerId, String? fruitId);
   Future<List<FruitModel?>> getFruits(String? token);
   Future<List<ComodityModel?>> getListComodity(String? token);
+  Future<List<ComodityModel?>> getListComodityVerified(String? token);
   Future<void> updateComodity(
       String? token,
       String? id,

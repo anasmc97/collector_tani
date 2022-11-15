@@ -196,16 +196,13 @@ class _HomePageState extends State<HomePage> {
                               image: images[i],
                               title: title[i],
                               onTap: () {
-                                BlocProvider.of<ComodityBloc>(context).add(
-                                  GetListComodityEvent(
-                                    token: widget.authModel!.token,
-                                  ),
-                                );
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return TransactionWithFarmerPage();
+                                      return TransactionWithFarmerPage(
+                                        token: widget.authModel!.token,
+                                      );
                                     },
                                   ),
                                 );

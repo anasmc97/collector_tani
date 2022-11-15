@@ -77,3 +77,14 @@ class GetListComodityEvent extends ComodityEvent {
         token,
       ];
 }
+
+class GetListComodityVerifiedEvent extends ComodityEvent {
+  final String? token;
+  const GetListComodityVerifiedEvent({
+    this.token,
+  });
+  @override
+  List<Object?> get props => [
+        token,
+      ];
+}

@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
+import 'package:project_tani/feature/comodity/data/models/comodity_model.dart';
 import 'package:project_tani/feature/comodity/domain/entity/comodity.dart';
 import 'package:project_tani/feature/transaction/presentation/widget/transaction_with_farmer_detail_widget.dart';
 
 class TransactionWithFarmerDetail extends StatelessWidget {
-  TransactionWithFarmerDetail({Key? key}) : super(key: key);
+  ComodityModel? comodity;
+  TransactionWithFarmerDetail({Key? key, this.comodity}) : super(key: key);
   TextEditingController qtyController = TextEditingController();
   TextEditingController priceController = TextEditingController();
 
@@ -50,15 +52,11 @@ class TransactionWithFarmerDetail extends StatelessWidget {
                                   fontWeight: FontWeight.w500, fontSize: 16),
                         ),
                       ),
-                      // TransactionWithFarmerDetailWidget(
-                      //   image: dummyListComodity[0].image,
-                      //   name: dummyListComodity[0].farmer!.name,
-                      //   comodity: dummyListComodity[0].comodityName,
-                      //   date: dummyListComodity[0].date,
-                      //   month: dummyListComodity[0].month,
-                      //   year: dummyListComodity[0].year,
-                      //   onTap: (){ },
-                      // ),
+                      TransactionWithFarmerDetailWidget(
+                        image: 'assets/fruit.png',
+                        comodityModel: comodity,
+                        onTap: () {},
+                      ),
                     ]))));
   }
 }

@@ -58,7 +58,7 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  comodityModel!.farmer!.name!,
+                                  comodityModel!.fruit!.name!,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText1!
@@ -78,7 +78,7 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 4.0),
                                       child: Text(
-                                        comodityModel!.fruit!.name!,
+                                        comodityModel!.farmer!.name!,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1!

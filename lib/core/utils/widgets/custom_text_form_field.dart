@@ -9,6 +9,7 @@ class CustomTextFormField extends StatefulWidget {
   bool? isDateField;
   bool? isNumber;
   String? Function(String?)? validator;
+  Function(String)? onChanged;
   CustomTextFormField(
       {Key? key,
       this.controller,
@@ -16,7 +17,8 @@ class CustomTextFormField extends StatefulWidget {
       this.isPasswordField = false,
       this.isDateField = false,
       this.isNumber,
-      this.validator})
+      this.validator,
+      this.onChanged})
       : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   TextEditingController? controller;
   String? hintext;
   String? Function(String?)? validator;
+  Function(String)? onChanged;
   @override
   void initState() {
     isObscure = widget.isPasswordField!;
@@ -40,12 +43,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     hintext = widget.hintext;
     isNumber = widget.isNumber;
     validator = widget.validator;
+    onChanged = widget.onChanged;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       validator: validator,
       keyboardType: isNumber != null ? TextInputType.number : null,
       obscureText: isObscure,
