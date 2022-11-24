@@ -226,14 +226,15 @@ class _HomePageState extends State<HomePage> {
                               image: images[i],
                               title: title[i],
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) {
-                                //       return SelectTransaction();
-                                //     },
-                                //   ),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return SelectTransaction(
+                                          authModel: widget.authModel);
+                                    },
+                                  ),
+                                );
                               });
                         } else {
                           return ButtonHome(

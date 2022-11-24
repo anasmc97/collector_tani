@@ -24,7 +24,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
   @override
   Future<void> addComodity(
       String? token, String? farmerId, String? fruitId) async {
-    final api = 'http://192.168.1.9:8000/api/collector/comodity';
+    final api = 'http://192.168.1.6:8000/api/collector/comodity';
     final data = {"farmer_id": farmerId, "fruit_id": fruitId};
 
     final dio = Dio();
@@ -42,7 +42,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
 
   @override
   Future<List<FruitModel?>> getFruits(String? token) async {
-    final api = 'http://192.168.1.9:8000/api/collector/fruit';
+    final api = 'http://192.168.1.6:8000/api/collector/fruit';
 
     final dio = Dio();
     Response response;
@@ -67,7 +67,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
 
   @override
   Future<List<ComodityModel?>> getListComodity(String? token) async {
-    final api = 'http://192.168.1.9:8000/api/collector/comodity';
+    final api = 'http://192.168.1.6:8000/api/collector/comodity';
 
     final dio = Dio();
     Response response;
@@ -98,7 +98,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
       String? harvestingDate,
       String? fruitGrade,
       int? weight) async {
-    final api = 'http://192.168.1.9:8000/api/collector/comodity/$id';
+    final api = 'http://192.168.1.6:8000/api/collector/comodity/$id';
     final data = {
       "blossoms_tree_date": blossomTreeDate,
       "harvesting_date": harvestingDate,
@@ -121,7 +121,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
 
   @override
   Future<void> verifyComodity(String? token, String? id) async {
-    final api = 'http://192.168.1.9:8000/api/collector/comodity/verify/$id';
+    final api = 'http://192.168.1.6:8000/api/collector/comodity/verify/$id';
 
     final dio = Dio();
     try {
@@ -137,7 +137,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
 
   @override
   Future<void> deleteComodity(String? token, String? id) async {
-    final api = 'http://192.168.1.9:8000/api/collector/comodity/$id';
+    final api = 'http://192.168.1.6:8000/api/collector/comodity/$id';
 
     final dio = Dio();
     try {
@@ -153,7 +153,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
 
   @override
   Future<List<ComodityModel?>> getListComodityVerified(String? token) async {
-    const api = 'http://192.168.1.9:8000/api/collector/comodity/list/verified/';
+    const api = 'http://192.168.1.6:8000/api/collector/comodity/list/verified/';
 
     final dio = Dio();
     Response response;

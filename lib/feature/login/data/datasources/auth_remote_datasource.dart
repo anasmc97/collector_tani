@@ -15,7 +15,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<AuthModel?> signUp(String? name, String? phoneNumber, String? email,
       String? password) async {
-    final api = 'http://192.168.1.9:8000/api/register';
+    final api = 'http://192.168.1.6:8000/api/register';
     final data = {
       "name": name,
       "phone_number": phoneNumber,
@@ -44,7 +44,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<AuthModel?> login(String? email, String? password) async {
-    final api = 'http://192.168.1.9:8000/api/login';
+    final api = 'http://192.168.1.6:8000/api/login';
     final data = {"email": email, "password": password};
 
     final dio = Dio();
@@ -71,7 +71,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<void> logout(String? token) async {
-    final api = 'http://192.168.1.9:8000/api/logout';
+    final api = 'http://192.168.1.6:8000/api/logout';
 
     final dio = Dio();
     try {

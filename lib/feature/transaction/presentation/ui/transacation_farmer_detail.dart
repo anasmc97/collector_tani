@@ -74,6 +74,7 @@ class _TransactionFarmerDetailState extends State<TransactionFarmerDetail> {
                       TransactionFarmerWidget(
                         image: 'assets/fruit.png',
                         comodityModel: widget.comodity,
+                        onTap: () {},
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 36.0),

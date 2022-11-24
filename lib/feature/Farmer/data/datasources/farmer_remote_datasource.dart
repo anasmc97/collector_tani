@@ -32,7 +32,7 @@ class FarmerRemoteDataSourceImpl implements FarmerRemoteDataSource {
       String? numberTree,
       String? estimationProduction,
       String? landSize) async {
-    final api = 'http://192.168.1.9:8000/api/collector/farmer';
+    final api = 'http://192.168.1.6:8000/api/collector/farmer';
     final data = {
       "name": name,
       "land_location": landLocation,
@@ -56,7 +56,7 @@ class FarmerRemoteDataSourceImpl implements FarmerRemoteDataSource {
 
   @override
   Future<List<FarmerModel?>?> getAllFarmer(String? token) async {
-    final api = 'http://192.168.1.9:8000/api/collector/farmer';
+    final api = 'http://192.168.1.6:8000/api/collector/farmer';
 
     final dio = Dio();
     Response response;
@@ -81,7 +81,7 @@ class FarmerRemoteDataSourceImpl implements FarmerRemoteDataSource {
 
   @override
   Future<void> deleteFarmer(String? token, String? id) async {
-    final api = 'http://192.168.1.9:8000/api/collector/farmer/$id';
+    final api = 'http://192.168.1.6:8000/api/collector/farmer/$id';
 
     final dio = Dio();
     try {
@@ -104,7 +104,7 @@ class FarmerRemoteDataSourceImpl implements FarmerRemoteDataSource {
       String? numberTree,
       String? estimationProduction,
       String? landSize) async {
-    final api = 'http://192.168.1.9:8000/api/collector/farmer/$id';
+    final api = 'http://192.168.1.6:8000/api/collector/farmer/$id';
     final data = {
       "name": name,
       "land_location": landLocation,

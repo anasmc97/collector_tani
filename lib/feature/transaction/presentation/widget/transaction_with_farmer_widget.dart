@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/comodity/data/models/comodity_model.dart';
+import 'package:project_tani/feature/transaction/domain/entities/farmer_transaction.dart';
 
 class TransactionWithFarmerWidget extends StatelessWidget {
   final String? image;
-  final ComodityModel? comodityModel;
+  final FarmerTransaction? farmerTransactionModel;
   final Function()? onTap;
   const TransactionWithFarmerWidget(
       {Key? key,
       required this.image,
-      required this.comodityModel,
+      required this.farmerTransactionModel,
       required this.onTap})
       : super(key: key);
 
@@ -58,7 +59,7 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  comodityModel!.fruit!.name!,
+                                  farmerTransactionModel!.fruit!.name!,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText1!
@@ -78,7 +79,8 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 4.0),
                                       child: Text(
-                                        comodityModel!.farmer!.name!,
+                                        farmerTransactionModel!
+                                            .comodity!.farmer!.name!,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1!
@@ -103,7 +105,9 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 4.0),
                                       child: Text(
-                                        comodityModel?.harvestingDate ?? '-',
+                                        farmerTransactionModel
+                                                ?.comodity?.harvestingDate ??
+                                            '-',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1!
@@ -119,7 +123,9 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 4.0),
                                   child: Text(
-                                    comodityModel?.weight?.toString() ?? '-',
+                                    farmerTransactionModel?.comodity?.weight
+                                            ?.toString() ??
+                                        '-',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText1!
@@ -131,7 +137,9 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  comodityModel?.priceKg?.toString() ?? '-',
+                                  farmerTransactionModel?.comodity?.priceKg
+                                          ?.toString() ??
+                                      '-',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText1!
