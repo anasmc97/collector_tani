@@ -16,3 +16,7 @@ class CustomColors {
   static const Color colorValidText = Color(0xFF5CB8E4);
   static const Color dangerColor = Color(0xFFDE0F0F);
 }
+
+class ConstantValue {
+  static const url = 'http://192.168.1.8:8000/';
+}

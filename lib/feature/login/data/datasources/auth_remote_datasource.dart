@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/login/data/models/auth_model.dart';
 
 import 'package:project_tani/core/error/error.dart';
@@ -15,7 +16,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<AuthModel?> signUp(String? name, String? phoneNumber, String? email,
       String? password) async {
-    final api = 'http://192.168.1.6:8000/api/register';
+    const api = ConstantValue.url + 'api/register';
     final data = {
       "name": name,
       "phone_number": phoneNumber,
@@ -44,7 +45,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<AuthModel?> login(String? email, String? password) async {
-    final api = 'http://192.168.1.6:8000/api/login';
+    const api = ConstantValue.url + 'api/login';
     final data = {"email": email, "password": password};
 
     final dio = Dio();
@@ -71,7 +72,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<void> logout(String? token) async {
-    final api = 'http://192.168.1.6:8000/api/logout';
+    const api = ConstantValue.url + 'api/logout';
 
     final dio = Dio();
     try {

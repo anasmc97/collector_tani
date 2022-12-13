@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/Farmer/data/models/farmer_model.dart';
 import 'package:project_tani/core/error/error.dart';
 
@@ -32,7 +33,7 @@ class FarmerRemoteDataSourceImpl implements FarmerRemoteDataSource {
       String? numberTree,
       String? estimationProduction,
       String? landSize) async {
-    final api = 'http://192.168.1.6:8000/api/collector/farmer';
+    const api = ConstantValue.url + 'api/collector/farmer';
     final data = {
       "name": name,
       "land_location": landLocation,
@@ -56,7 +57,7 @@ class FarmerRemoteDataSourceImpl implements FarmerRemoteDataSource {
 
   @override
   Future<List<FarmerModel?>?> getAllFarmer(String? token) async {
-    final api = 'http://192.168.1.6:8000/api/collector/farmer';
+    const api = ConstantValue.url + 'api/collector/farmer';
 
     final dio = Dio();
     Response response;
@@ -81,7 +82,7 @@ class FarmerRemoteDataSourceImpl implements FarmerRemoteDataSource {
 
   @override
   Future<void> deleteFarmer(String? token, String? id) async {
-    final api = 'http://192.168.1.6:8000/api/collector/farmer/$id';
+    final api = ConstantValue.url + 'api/collector/farmer/$id';
 
     final dio = Dio();
     try {
@@ -104,7 +105,7 @@ class FarmerRemoteDataSourceImpl implements FarmerRemoteDataSource {
       String? numberTree,
       String? estimationProduction,
       String? landSize) async {
-    final api = 'http://192.168.1.6:8000/api/collector/farmer/$id';
+    final api = ConstantValue.url + 'api/collector/farmer/$id';
     final data = {
       "name": name,
       "land_location": landLocation,

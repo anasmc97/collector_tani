@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:project_tani/core/error/error.dart';
+import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/comodity/data/models/comodity_model.dart';
 import 'package:project_tani/feature/comodity/data/models/fruit_model.dart';
 
@@ -24,7 +25,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
   @override
   Future<void> addComodity(
       String? token, String? farmerId, String? fruitId) async {
-    final api = 'http://192.168.1.6:8000/api/collector/comodity';
+    const api = ConstantValue.url + 'api/collector/comodity';
     final data = {"farmer_id": farmerId, "fruit_id": fruitId};
 
     final dio = Dio();
@@ -42,7 +43,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
 
   @override
   Future<List<FruitModel?>> getFruits(String? token) async {
-    final api = 'http://192.168.1.6:8000/api/collector/fruit';
+    const api = ConstantValue.url + 'api/collector/fruit';
 
     final dio = Dio();
     Response response;
@@ -67,7 +68,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
 
   @override
   Future<List<ComodityModel?>> getListComodity(String? token) async {
-    final api = 'http://192.168.1.6:8000/api/collector/comodity';
+    const api = ConstantValue.url + 'api/collector/comodity';
 
     final dio = Dio();
     Response response;
@@ -98,7 +99,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
       String? harvestingDate,
       String? fruitGrade,
       int? weight) async {
-    final api = 'http://192.168.1.6:8000/api/collector/comodity/$id';
+    final api = ConstantValue.url + 'api/collector/comodity/$id';
     final data = {
       "blossoms_tree_date": blossomTreeDate,
       "harvesting_date": harvestingDate,
@@ -121,7 +122,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
 
   @override
   Future<void> verifyComodity(String? token, String? id) async {
-    final api = 'http://192.168.1.6:8000/api/collector/comodity/verify/$id';
+    final api = ConstantValue.url + 'api/collector/comodity/verify/$id';
 
     final dio = Dio();
     try {
@@ -137,7 +138,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
 
   @override
   Future<void> deleteComodity(String? token, String? id) async {
-    final api = 'http://192.168.1.6:8000/api/collector/comodity/$id';
+    final api = ConstantValue.url + 'api/collector/comodity/$id';
 
     final dio = Dio();
     try {
@@ -153,7 +154,7 @@ class ComodityRemoteDataSourceImpl implements ComodityRemoteDataSource {
 
   @override
   Future<List<ComodityModel?>> getListComodityVerified(String? token) async {
-    const api = 'http://192.168.1.6:8000/api/collector/comodity/list/verified/';
+    const api = ConstantValue.url + 'api/collector/comodity/list/verified/';
 
     final dio = Dio();
     Response response;

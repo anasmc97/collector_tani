@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:project_tani/core/error/error.dart';
+import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/transaction/data/models/farmer_transaction_model.dart';
 
 abstract class FarmerTransactionRemoteDataSource {
@@ -18,7 +19,7 @@ class FarmerTransactionRemoteDataSourceImpl
   @override
   Future<void> addFarmerTransaction(String? token, String? fruitComodityId,
       int? weight, int? price, int? priceTotal) async {
-    final api = 'http://192.168.1.6:8000/api/collector/transaction/farmer';
+    const api = ConstantValue.url + 'api/collector/transaction/farmer';
     final data = json.encode({
       "fruit_comodity_id": fruitComodityId,
       "weight": weight,
@@ -46,7 +47,7 @@ class FarmerTransactionRemoteDataSourceImpl
   @override
   Future<List<FarmerTransactionModel?>> getListFarmerTransaction(
       String? token) async {
-    const api = 'http://192.168.1.6:8000/api/collector/transaction/farmer';
+    const api = ConstantValue.url + 'api/collector/transaction/farmer';
 
     final dio = Dio();
     Response response;
@@ -74,8 +75,7 @@ class FarmerTransactionRemoteDataSourceImpl
   @override
   Future<FarmerTransactionModel?> getFarmerTransaction(
       String? token, String? id) async {
-    final api =
-        'http://192.168.1.6:8000/api/collector/transaction/farmer/show/$id';
+    final api = ConstantValue.url + 'api/collector/transaction/farmer/show/$id';
 
     final dio = Dio();
     Response response;

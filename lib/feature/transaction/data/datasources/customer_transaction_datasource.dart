@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:project_tani/core/error/error.dart';
+import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/transaction/data/models/customer_transaction_model.dart';
 import 'package:project_tani/feature/transaction/data/models/farmer_transaction_model.dart';
 
@@ -36,7 +37,7 @@ class CustomerTransactionRemoteDataSourceImpl
       String? address,
       String? receiverName,
       String? phoneNumber) async {
-    const api = 'http://192.168.1.6:8000/api/collector/transaction/customer';
+    const api = ConstantValue.url + 'api/collector/transaction/customer';
     final data = {
       "fruit_comodity_id": farmerTransactionId,
       "weight": weight,
@@ -65,7 +66,7 @@ class CustomerTransactionRemoteDataSourceImpl
   @override
   Future<List<CustomerTransactionModel?>> getListCustomerTransaction(
       String? token) async {
-    const api = 'http://192.168.1.6:8000/api/collector/transaction/customer';
+    const api = ConstantValue.url + 'api/collector/transaction/customer';
 
     final dio = Dio();
     Response response;
@@ -94,7 +95,7 @@ class CustomerTransactionRemoteDataSourceImpl
   Future<CustomerTransactionModel?> getCustomerTransaction(
       String? token, String? id) async {
     final api =
-        'http://192.168.1.6:8000/api/collector/transaction/fcustomer/show/$id';
+        ConstantValue.url + 'api/collector/transaction/fcustomer/show/$id';
 
     final dio = Dio();
     Response response;
