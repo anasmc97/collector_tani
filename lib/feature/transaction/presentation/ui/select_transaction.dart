@@ -76,7 +76,8 @@ class SelectTransaction extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return AddCustomerTransactionPage();
+                            return AddCustomerTransactionPage(
+                                token: authModel!.token);
                           },
                         ),
                       );
