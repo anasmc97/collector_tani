@@ -13,8 +13,7 @@ class FarmerTransactionModel extends FarmerTransaction {
       required int? payment,
       required int? priceKg,
       required int? weightSelled,
-      required Comodity? comodity,
-      required Fruit? fruit})
+      required Comodity? comodity})
       : super(
             id: id,
             fruitComodityId: fruitComodityId,
@@ -22,8 +21,7 @@ class FarmerTransactionModel extends FarmerTransaction {
             payment: payment,
             priceKg: priceKg,
             weightSelled: weightSelled,
-            comodity: comodity,
-            fruit: fruit);
+            comodity: comodity);
 
   factory FarmerTransactionModel.fromJson(Map<String, dynamic> json) {
     return FarmerTransactionModel(
@@ -36,7 +34,6 @@ class FarmerTransactionModel extends FarmerTransaction {
       comodity: ComodityModel.fromJson(
         json['fruit_commodity'],
       ),
-      fruit: FruitModel.fromJson(json['fruit']),
     );
   }
 }

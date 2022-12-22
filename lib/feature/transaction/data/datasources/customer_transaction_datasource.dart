@@ -39,12 +39,12 @@ class CustomerTransactionRemoteDataSourceImpl
       String? phoneNumber) async {
     const api = ConstantValue.url + 'api/collector/transaction/customer';
     final data = {
-      "fruit_comodity_id": farmerTransactionId,
+      "farmer_transaction_id": farmerTransactionId,
       "weight": weight,
       "price": price,
-      "shipping_payment": shippingPayment,
+      "shiping_payment": shippingPayment,
       "total_payment": totalPayment,
-      "shipping_date": shippingDate,
+      "shiping_date": shippingDate,
       "address": address,
       "receiver_name": receiverName,
       "phone_number": phoneNumber,

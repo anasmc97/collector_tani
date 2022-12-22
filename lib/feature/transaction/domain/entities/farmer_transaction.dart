@@ -11,16 +11,15 @@ class FarmerTransaction extends Equatable {
   final int? priceKg;
   final int? weightSelled;
   final Comodity? comodity;
-  final Fruit? fruit;
-  FarmerTransaction(
-      {this.id,
-      this.fruitComodityId,
-      this.weight,
-      this.payment,
-      this.priceKg,
-      this.weightSelled,
-      this.comodity,
-      this.fruit});
+  FarmerTransaction({
+    this.id,
+    this.fruitComodityId,
+    this.weight,
+    this.payment,
+    this.priceKg,
+    this.weightSelled,
+    this.comodity,
+  });
 
   @override
   // TODO: implement props
@@ -32,6 +31,5 @@ class FarmerTransaction extends Equatable {
         priceKg,
         weightSelled,
         comodity,
-        fruit
       ];
 }

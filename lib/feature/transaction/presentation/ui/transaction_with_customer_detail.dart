@@ -2,11 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/comodity/domain/entity/comodity.dart';
+import 'package:project_tani/feature/transaction/data/models/customer_transaction_model.dart';
+import 'package:project_tani/feature/transaction/domain/entities/customer_transaction.dart';
 import 'package:project_tani/feature/transaction/presentation/widget/transaction_with_customer_detail_widget.dart';
 import 'package:project_tani/feature/transaction/presentation/widget/transaction_with_farmer_detail_widget.dart';
 
 class TransactionWithCustomerDetail extends StatelessWidget {
-  TransactionWithCustomerDetail({Key? key}) : super(key: key);
+  CustomerTransaction? customerTransaction;
+  int? totalPayment;
+  TransactionWithCustomerDetail(
+      {Key? key, this.customerTransaction, this.totalPayment})
+      : super(key: key);
   TextEditingController qtyController = TextEditingController();
   TextEditingController priceController = TextEditingController();
 
@@ -39,18 +45,13 @@ class TransactionWithCustomerDetail extends StatelessWidget {
                 ],
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 40.0),
-            //   child: TransactionWithCustomerDetailWidget(
-            //     image: dummyListComodity[0].image,
-            //     name: dummyListComodity[0].farmer!.name,
-            //     comodity: dummyListComodity[0].comodityName,
-            //     date: dummyListComodity[0].date,
-            //     month: dummyListComodity[0].month,
-            //     year: dummyListComodity[0].year,
-            //     onTap: (){ },
-            //   ),
-            // ),
+            Padding(
+              padding: const EdgeInsets.only(top: 40.0),
+              child: TransactionWithCustomerDetailWidget(
+                image: 'assets/fruit.png',
+                customerTransactionModel: customerTransaction,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 48),
               child: Text(
@@ -74,7 +75,7 @@ class TransactionWithCustomerDetail extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text(
-                'Imam',
+                customerTransaction!.receiverName!,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
@@ -94,7 +95,7 @@ class TransactionWithCustomerDetail extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text(
-                '082211xxxxx',
+                customerTransaction!.customer!.phoneNumber!,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
@@ -114,7 +115,7 @@ class TransactionWithCustomerDetail extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text(
-                'Jalan braga',
+                customerTransaction!.address!,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
@@ -134,7 +135,7 @@ class TransactionWithCustomerDetail extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text(
-                'DD-MM-YYYY',
+                customerTransaction!.shipingDate!,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
@@ -164,14 +165,14 @@ class TransactionWithCustomerDetail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Manggis (A) X 10 Kg',
+                    '${customerTransaction!.farmerTransaction!.comodity!.fruit!.name} (${customerTransaction!.farmerTransaction!.comodity!.fruitGrade}) x ${customerTransaction!.weight} Kg',
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                         color: CustomColors.colorsFontPrimary),
                   ),
                   Text(
-                    'Rp 000000',
+                    'Rp ' + customerTransaction!.totalPayment.toString(),
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
@@ -193,7 +194,7 @@ class TransactionWithCustomerDetail extends StatelessWidget {
                         color: CustomColors.colorsFontPrimary),
                   ),
                   Text(
-                    'Rp 000000',
+                    'Rp ' + customerTransaction!.shippingPayment.toString(),
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
@@ -222,7 +223,7 @@ class TransactionWithCustomerDetail extends StatelessWidget {
                         color: CustomColors.colorsFontPrimary),
                   ),
                   Text(
-                    'Rp 000000',
+                    'Rp ' + totalPayment.toString(),
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,

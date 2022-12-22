@@ -6,14 +6,15 @@ import 'package:project_tani/core/utils/widgets/custom_button.dart';
 import 'package:project_tani/core/utils/widgets/custom_text_form_field.dart';
 import 'package:project_tani/feature/comodity/data/models/comodity_model.dart';
 import 'package:project_tani/feature/comodity/domain/entity/comodity.dart';
+import 'package:project_tani/feature/transaction/domain/entities/farmer_transaction.dart';
 import 'package:project_tani/feature/transaction/presentation/bloc/customer_transaction_bloc/customer_transaction_bloc.dart';
 import 'package:project_tani/feature/transaction/presentation/widget/transaction_customer_widget.dart';
 import 'package:project_tani/feature/transaction/presentation/widget/transaction_farmer_widget.dart';
 
 class TransactionCustomerDetail extends StatefulWidget {
   String? token;
-  ComodityModel? comodityModel;
-  TransactionCustomerDetail({Key? key, this.comodityModel, this.token})
+  FarmerTransaction? farmerTransaction;
+  TransactionCustomerDetail({Key? key, this.farmerTransaction, this.token})
       : super(key: key);
 
   @override
@@ -23,18 +24,36 @@ class TransactionCustomerDetail extends StatefulWidget {
 
 class _TransactionCustomerDetailState extends State<TransactionCustomerDetail> {
   TextEditingController qtyController = TextEditingController();
-
   TextEditingController priceController = TextEditingController();
-
   TextEditingController nameController = TextEditingController();
-
   TextEditingController phoneNumberController = TextEditingController();
-
   TextEditingController addressController = TextEditingController();
-
   TextEditingController sentDateController = TextEditingController();
-
   TextEditingController shippingPriceController = TextEditingController();
+  int totalPrice = 0;
+  @override
+  void initState() {
+    priceController.addListener(() {
+      setState(() {
+        totalPrice =
+            int.parse(qtyController.text) * int.parse(priceController.text);
+      });
+    });
+    qtyController.addListener(() {
+      setState(() {
+        totalPrice =
+            int.parse(qtyController.text) * int.parse(priceController.text);
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    priceController.dispose();
+    qtyController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +97,7 @@ class _TransactionCustomerDetailState extends State<TransactionCustomerDetail> {
                 ),
                 TransactionCustomerWidget(
                   image: 'assets/fruit.png',
-                  comodityModel: widget.comodityModel,
+                  comodity: widget.farmerTransaction?.comodity,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 16.0),
@@ -293,7 +312,7 @@ class _TransactionCustomerDetailState extends State<TransactionCustomerDetail> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
-                                child: Text('Rp 0000',
+                                child: Text(totalPrice.toString(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline1!
@@ -327,14 +346,15 @@ class _TransactionCustomerDetailState extends State<TransactionCustomerDetail> {
                               AddCustomerTransactionEvent(
                                   shippingPayment: shippingPriceController.text,
                                   phoneNumber: phoneNumberController.text,
-                                  weight: ,
+                                  weight: qtyController.text,
                                   shippingDate: sentDateController.text,
                                   price: priceController.text,
                                   receiverName: nameController.text,
-                                  totalPayment: '',
-                                  farmerTransactionId: widget.comodityModel.,
-                                  address: '',
-                                  token: ''),
+                                  totalPayment: totalPrice.toString(),
+                                  farmerTransactionId:
+                                      widget.farmerTransaction?.id,
+                                  address: addressController.text,
+                                  token: widget.token),
                             );
                           },
                         ),

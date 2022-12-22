@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/comodity/domain/entity/comodity.dart';
 import 'package:project_tani/feature/comodity/presentation/bloc/comodity_bloc.dart';
+import 'package:project_tani/feature/transaction/domain/entities/farmer_transaction.dart';
+import 'package:project_tani/feature/transaction/presentation/bloc/farmer_transaction_bloc/farmer_transaction_bloc.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/transacation_farmer_detail.dart';
 import 'package:project_tani/feature/transaction/presentation/ui/transaction_customer_detail.dart';
 import 'package:project_tani/feature/transaction/presentation/widget/transaction_farmer_widget.dart';
+import 'package:project_tani/feature/transaction/presentation/widget/transaction_with_farmer_widget.dart';
 
 class AddCustomerTransactionPage extends StatefulWidget {
   String? token;
@@ -20,8 +23,8 @@ class _AddCustomerTransactionPageState
     extends State<AddCustomerTransactionPage> {
   @override
   void initState() {
-    BlocProvider.of<ComodityBloc>(context).add(
-      GetListComodityVerifiedEvent(
+    BlocProvider.of<FarmerTransactionBloc>(context).add(
+      GetListFarmerTransactionEvent(
         token: widget.token,
       ),
     );
@@ -68,46 +71,47 @@ class _AddCustomerTransactionPageState
                         .copyWith(fontWeight: FontWeight.w500, fontSize: 16),
                   ),
                 ),
-                BlocBuilder<ComodityBloc, ComodityState>(
+                BlocBuilder<FarmerTransactionBloc, FarmerTransactionState>(
                   builder: (context, state) {
-                    if (state is ComodityLoading) {
+                    if (state is FarmerTransactionLoading) {
                       return const Padding(
                         padding: EdgeInsets.only(top: 48.0),
                         child: Center(
                             child: CircularProgressIndicator(
                                 color: CustomColors.primary)),
                       );
-                    } else if (state is ComodityEmpty) {
+                    } else if (state is FarmerTransactionEmpty) {
                       return const Padding(
                         padding: EdgeInsets.only(top: 48.0),
                         child: Center(
                             child: Text(
                                 'daftar komidatas yang sudah diverifikasi kosong')),
                       );
-                    } else if (state is GetListComoditySuccess) {
+                    } else if (state is GetListFarmerTransactionSuccess) {
                       return SizedBox(
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
-                            itemCount: state.listComodity.length,
+                            itemCount: state.listFarmerTransaction?.length ?? 0,
                             itemBuilder: (context, index) =>
-                                TransactionFarmerWidget(
+                                TransactionWithFarmerWidget(
                                   image: 'assets/fruit.png',
-                                  comodityModel: state.listComodity[index],
                                   onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
                                           return TransactionCustomerDetail(
-                                            comodityModel:
-                                                state.listComodity[index],
+                                            farmerTransaction: state
+                                                .listFarmerTransaction![index],
                                             token: widget.token,
                                           );
                                         },
                                       ),
                                     );
                                   },
+                                  farmerTransactionModel:
+                                      state.listFarmerTransaction![index],
                                 )),
                       );
                     } else {

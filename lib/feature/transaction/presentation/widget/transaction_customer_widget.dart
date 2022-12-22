@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/comodity/data/models/comodity_model.dart';
+import 'package:project_tani/feature/comodity/domain/entity/comodity.dart';
 
 class TransactionCustomerWidget extends StatefulWidget {
   final String? image;
-  final ComodityModel? comodityModel;
+  final Comodity? comodity;
   const TransactionCustomerWidget(
-      {Key? key, required this.image, required this.comodityModel})
+      {Key? key, required this.image, required this.comodity})
       : super(key: key);
 
   @override
@@ -58,7 +59,7 @@ class _TransactionCustomerWidgetState extends State<TransactionCustomerWidget> {
                             Padding(
                               padding: const EdgeInsets.only(left: 16.0),
                               child: Text(
-                                widget.comodityModel!.fruit!.name!,
+                                widget.comodity!.fruit!.name!,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText1!
@@ -83,7 +84,7 @@ class _TransactionCustomerWidgetState extends State<TransactionCustomerWidget> {
                           .headline2!
                           .copyWith(fontWeight: FontWeight.w500, fontSize: 14),
                     ),
-                    Text(widget.comodityModel!.farmer!.name!,
+                    Text(widget.comodity!.farmer!.name!,
                         style: Theme.of(context).textTheme.headline1!.copyWith(
                             fontWeight: FontWeight.w500, fontSize: 14))
                   ],
@@ -98,7 +99,7 @@ class _TransactionCustomerWidgetState extends State<TransactionCustomerWidget> {
                           .headline2!
                           .copyWith(fontWeight: FontWeight.w500, fontSize: 14),
                     ),
-                    Text(widget.comodityModel?.harvestingDate ?? '-',
+                    Text(widget.comodity?.harvestingDate ?? '-',
                         style: Theme.of(context).textTheme.headline1!.copyWith(
                             fontWeight: FontWeight.w500, fontSize: 14))
                   ],
@@ -113,7 +114,7 @@ class _TransactionCustomerWidgetState extends State<TransactionCustomerWidget> {
                           .headline2!
                           .copyWith(fontWeight: FontWeight.w500, fontSize: 14),
                     ),
-                    Text(widget.comodityModel?.weight.toString() ?? '-',
+                    Text(widget.comodity?.weight.toString() ?? '-',
                         style: Theme.of(context).textTheme.headline1!.copyWith(
                             fontWeight: FontWeight.w500, fontSize: 14))
                   ],
@@ -128,7 +129,7 @@ class _TransactionCustomerWidgetState extends State<TransactionCustomerWidget> {
                           .headline2!
                           .copyWith(fontWeight: FontWeight.w500, fontSize: 14),
                     ),
-                    Text(widget.comodityModel?.priceKg.toString() ?? '-',
+                    Text(widget.comodity?.priceKg.toString() ?? '-',
                         style: Theme.of(context).textTheme.headline1!.copyWith(
                             fontWeight: FontWeight.w500, fontSize: 14))
                   ],

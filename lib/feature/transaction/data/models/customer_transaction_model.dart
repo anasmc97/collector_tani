@@ -45,7 +45,7 @@ class CustomerTransactionModel extends CustomerTransaction {
       struckLink: json['struck_link'],
       address: json['address'],
       receiverName: json['receiver_name'],
-      shippingPayment: json['shipping_payment'],
+      shippingPayment: json['shiping_payment'],
       price: json['price'],
       customer: CustomerModel.fromJson(
         json['customer'],

@@ -212,14 +212,16 @@ class _HomePageState extends State<HomePage> {
                               image: images[i],
                               title: title[i],
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) {
-                                //       return TransactionWithCustomerPage();
-                                //     },
-                                //   ),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return TransactionWithCustomerPage(
+                                        token: widget.authModel!.token,
+                                      );
+                                    },
+                                  ),
+                                );
                               });
                         } else if (title[i] == 'Buat Transaksi') {
                           return ButtonHome(

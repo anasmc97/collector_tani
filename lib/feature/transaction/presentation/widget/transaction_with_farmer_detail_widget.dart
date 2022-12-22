@@ -57,7 +57,7 @@ class TransactionWithFarmerDetailWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  farmerTransaction!.fruit!.name!,
+                                  farmerTransaction!.comodity!.fruit!.name!,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText1!

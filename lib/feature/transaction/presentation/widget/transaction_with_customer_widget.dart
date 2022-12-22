@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:project_tani/core/utils/shared_value.dart';
 import 'package:project_tani/feature/comodity/data/models/comodity_model.dart';
+import 'package:project_tani/feature/transaction/data/models/customer_transaction_model.dart';
+import 'package:project_tani/feature/transaction/domain/entities/customer_transaction.dart';
 import 'package:project_tani/feature/transaction/domain/entities/farmer_transaction.dart';
 
-class TransactionWithFarmerWidget extends StatelessWidget {
+class TransactionWithCustomerWidget extends StatelessWidget {
   final String? image;
-  final FarmerTransaction? farmerTransactionModel;
+  final CustomerTransaction? customerTransactionModel;
   final Function()? onTap;
-  const TransactionWithFarmerWidget(
+  const TransactionWithCustomerWidget(
       {Key? key,
       required this.image,
-      required this.farmerTransactionModel,
+      required this.customerTransactionModel,
       required this.onTap})
       : super(key: key);
 
@@ -59,7 +61,7 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  farmerTransactionModel!
+                                  customerTransactionModel!.farmerTransaction!
                                       .comodity!.fruit!.name!,
                                   style: Theme.of(context)
                                       .textTheme
@@ -80,8 +82,11 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 4.0),
                                       child: Text(
-                                        farmerTransactionModel!
-                                            .comodity!.farmer!.name!,
+                                        customerTransactionModel!
+                                            .farmerTransaction!
+                                            .comodity!
+                                            .farmer!
+                                            .name!,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1!
@@ -106,8 +111,10 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 4.0),
                                       child: Text(
-                                        farmerTransactionModel
-                                                ?.comodity?.harvestingDate ??
+                                        customerTransactionModel!
+                                                .farmerTransaction!
+                                                ?.comodity
+                                                ?.harvestingDate ??
                                             '-',
                                         style: Theme.of(context)
                                             .textTheme
@@ -124,7 +131,8 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 4.0),
                                   child: Text(
-                                    farmerTransactionModel?.comodity?.weight
+                                    customerTransactionModel!
+                                            .farmerTransaction!.comodity?.weight
                                             ?.toString() ??
                                         '-',
                                     style: Theme.of(context)
@@ -138,7 +146,8 @@ class TransactionWithFarmerWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  farmerTransactionModel?.comodity?.priceKg
+                                  customerTransactionModel!
+                                          .farmerTransaction!?.comodity?.priceKg
                                           ?.toString() ??
                                       '-',
                                   style: Theme.of(context)
